@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leyla Heydarova</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="~/assets/style/style.css" />
+    <link rel="stylesheet" href="~/assets/style/colors/color-3.css" />
+    <!--Style Switcher-->
+    <link rel="stylesheet" href="~/assets/style/skin-switcher.css" />
+  </head>
+<body>
+    <!--Main Container Start-->
+    <div class="main-container">
+      <!--Aside Start-->
+      <div class="aside">
+        <div class="logo">
+          <a href="#"><span>L</span>eyla</a>
+        </div>
+        <div class="nav-toggler">
+          <span></span>
+        </div>
+            <ul class="nav">
+                <li>
+                    <a asp-controller="Home" asp-action="Index"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="About" asp-action="Index"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "About" ? "active" : "")">
+                        <i class="fa fa-user"></i>About
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Service" asp-action="Index"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Service" ? "active" : "")">
+                        <i class="fa fa-list"></i>Services
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Portfolio" asp-action="Index"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Portfolio" ? "active" : "")">
+                        <i class="fa fa-briefcase"></i>Portfolio
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Contact" asp-action="Index"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")">
+                        <i class="fa fa-comments"></i>Contact
+                    </a>
+                </li>
+            </ul>
+      </div>
+      <!--Aside End-->
+        <div class="main-content">
+          @RenderBody()
+            <!--Contact Section End-->
+        </div>
+        <!--Main Content End-->
+    </div>
+    <!--Main Container End-->
+    <!--Style Switcher Start-->
+    
+    <!--Style Switcher End-->
+    <!--JS Files-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
+            referrerpolicy="no-referrer"></script>
+    <script src="~/assets/js/app.js"></script>
+</body>
+</html>
