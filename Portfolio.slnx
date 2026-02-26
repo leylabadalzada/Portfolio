@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="Portfolio.Core/Portfolio.Core.csproj" Id="21b312cd-c847-4b92-aecf-66e5e8efdcac" />
+  <Project Path="Portfolio.Data/Portfolio.Data.csproj" Id="ad72a8f3-f769-42b6-b9b8-85d2df7c57ad" />
+  <Project Path="Portfolio.Service/Portfolio.Service.csproj" Id="a562dd2c-d768-4bea-949d-c1ce024ab317" />
   <Project Path="Portfolio.Web/Portfolio.Web.csproj" />
 </Solution>
