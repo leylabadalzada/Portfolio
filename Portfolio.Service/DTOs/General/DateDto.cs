@@ -1,6 +1,6 @@
 ﻿namespace Portfolio.Service.DTOs.General
 {
-    public class DateDto
+    public record DateDto
     {
         public int Day { get; set; }
         public int Month { get; set; }

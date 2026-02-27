@@ -2,6 +2,6 @@
 {
     public static class FilePaths
     {
-        public static string AuthorPath { get { return "assets/"; } }
+        public static string AuthorPath { get { return "nassets/images/authors"; } }
     }
 }

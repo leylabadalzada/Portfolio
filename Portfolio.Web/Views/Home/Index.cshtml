@@ -1,26 +1,24 @@
-﻿<section class="home active section" id="home">
+﻿@model HomeVM
+
+<section class="home active section" id="home">
     <div class="container">
         <div class="row">
             <div class="home-info padd-15">
                 <h3 class="hello">
-                    Hello, I am <span class="name">Leyla Heydarova</span>
+                    Hello, I am <span class="name">@Model.Author.FullName</span>
                 </h3>
                 <h3 class="my-profession">
                     <span class="typing">Backend Developer</span>
                 </h3>
                 <p>
-                    I am a Backend Developer with internship experience for over a
-                    half of a year. My expertise is to be responsible for
-                    server-sided development, focusing on the databases, server
-                    logic, application programming interfaces, and integration of
-                    these with front-end of the applications (websites).
+                    @Model.Author.Info
                 </p>
                 <a href="~/assets/documents/DOC-20231229-WA0063"
                    class="btn"
                    download="">Download CV</a>
             </div>
             <div class="home-img padd-15">
-                <img src="~/assets/images/owner/1640955548916.jpg"
+                <img src="@Model.Author.ImageURL"
                      alt="My image" />
             </div>
         </div>

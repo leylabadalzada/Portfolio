@@ -1,14 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
-using Portfolio.Web.Models;
-using System.Diagnostics;
+using Portfolio.Service.Services.Abstractions;
+using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        readonly IAuthorService _author;
+
+        public HomeController(IAuthorService author)
         {
-            return View();
+            _author = author;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var vm = new HomeVM()
+            {
+                Author = await _author.GetAsync()
+            };
+            return View(vm);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Portfolio.Data.Contexts
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             #region TimeConfiguring
             var changedEntries = ChangeTracker.Entries<BaseEntity>()
@@ -38,8 +38,7 @@ namespace Portfolio.Data.Contexts
                 }
             }
             #endregion
-
-            base.OnConfiguring(optionsBuilder);
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

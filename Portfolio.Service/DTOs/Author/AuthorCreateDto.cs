@@ -3,7 +3,7 @@ using Portfolio.Service.DTOs.General;
 
 namespace Portfolio.Service.DTOs.Author
 {
-    public class AuthorCreateDto
+    public record AuthorCreateDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
