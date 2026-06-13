@@ -6,18 +6,21 @@ namespace Portfolio.Web.Controllers
 {
     public class HomeController : Controller
     {
-        readonly IAuthorService _author;
+        readonly IAuthorService _authorService;
+        readonly IResumeService _resumeService;
 
-        public HomeController(IAuthorService author)
+        public HomeController(IAuthorService authorService, IResumeService resumeService)
         {
-            _author = author;
+            _authorService = authorService;
+            _resumeService = resumeService;
         }
 
         public async Task<IActionResult> Index()
         {
             var vm = new HomeVM()
             {
-                Author = await _author.GetAsync()
+                Author = await _authorService.GetAsync(),
+                Resume = await _resumeService.GetLastResumeAsync()
             };
             return View(vm);
         }

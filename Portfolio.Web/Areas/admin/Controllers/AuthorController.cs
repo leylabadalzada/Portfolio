@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Portfolio.Service.DTOs.Author;
 using Portfolio.Service.Services.Abstractions;
+using Portfolio.Service.ViewModels.Author;
+using Portfolio.Service.ViewModels.General;
 
 namespace Portfolio.Web.Areas.admin.Controllers
 {
@@ -14,23 +15,39 @@ namespace Portfolio.Web.Areas.admin.Controllers
             _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _service.GetAsync());
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Edit()
         {
-            return View();
+            var author = await _service.GetAsync();
+            var vm = new AuthorUpdateVM()
+            {
+                Description = author.Description,
+                FirstName = author.FirstName,
+                LastName = author.LastName,
+                Location = author.Location,
+                Info = author.Info,
+                isFreelanceAvailable = author.isFreelanceAvailable,
+                BirthDate = new DateVM
+                {
+                    Year = author.BirthDate.Year,
+                    Day = author.BirthDate.Day,
+                    Month = author.BirthDate.Month
+                }
+            };
+            return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AuthorCreateDto dto)
+        public async Task<IActionResult> Edit(AuthorUpdateVM vm)
         {
-            if (!ModelState.IsValid) return View(dto);
+            if (!ModelState.IsValid) return View(vm);
 
-            var result = await _service.CreateAsync(dto);
-            return result ? RedirectToAction(nameof(Index)) : View(dto);
+            var result = await _service.UpdateAsync(vm);
+            return result ? RedirectToAction(nameof(Index)) : View(vm);
         }
 
         public IActionResult ChangeImage()
@@ -39,12 +56,12 @@ namespace Portfolio.Web.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangeImage(ChangeImageDto dto)
+        public async Task<IActionResult> ChangeImage(ChangeImageVM vm)
         {
-            if (!ModelState.IsValid) return View(dto);
+            if (!ModelState.IsValid) return View(vm);
 
-            var result = await _service.ChangeImageAsync(dto);
-            return result ? RedirectToAction(nameof(Index)) : View(dto);
+            var result = await _service.ChangeImageAsync(vm);
+            return result ? RedirectToAction(nameof(Index)) : View(vm);
         }
     }
 }

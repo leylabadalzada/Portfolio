@@ -1,4 +1,35 @@
-﻿Authors
+﻿@model AuthorGetVM
 
-<a asp-controller="author" asp-action="create">Create new Author</a>
-<a asp-controller="author" asp-action="ChangeImage">Change the Image</a>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Info</th>
+                <th scope="col">Description</th>
+                <th scope="col">Location</th>
+                <th scope="col">Birthdate</th>
+                <th scope="col">IsFreeAvailable</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@Model.Id</th>
+                <td>@Model.FirstName</td>
+                <td>@Model.LastName</td>
+                <td>@Model.Info</td>
+                <td>@Model.Description</td>
+                <td>@Model.Location</td>
+                <td>@Model.BirthDate</td>
+                <td>@Model.isFreelanceAvailable</td>
+                <td><img src="~/assets/images/authors/@Model.ImageName" class="img-fluid" alt="Alternate Text" /></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-warning" asp-area="admin" asp-controller="author" asp-action="edit">Update</a>
+    <a class="btn btn-outline-warning" asp-area="admin" asp-controller="author" asp-action="changeimage">Change Image</a>
+</div>

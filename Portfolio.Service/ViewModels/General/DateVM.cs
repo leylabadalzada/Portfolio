@@ -1,6 +1,6 @@
-﻿namespace Portfolio.Service.DTOs.General
+﻿namespace Portfolio.Service.ViewModels.General
 {
-    public record DateDto
+    public record DateVM
     {
         public int Day { get; set; }
         public int Month { get; set; }

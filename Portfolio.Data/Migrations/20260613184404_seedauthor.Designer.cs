@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Portfolio.Data.Contexts;
@@ -11,9 +12,11 @@ using Portfolio.Data.Contexts;
 namespace Portfolio.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260613184404_seedauthor")]
+    partial class seedauthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,9 +79,9 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("eb0a348b-b3ac-46aa-9931-623a6b70c5fc"),
+                            ID = new Guid("3912d27d-08e7-41aa-a7db-c0296f92212d"),
                             BirthDate = new DateOnly(2000, 4, 2),
-                            CreatedAt = new DateTime(2026, 6, 14, 1, 46, 28, 709, DateTimeKind.Utc).AddTicks(6223),
+                            CreatedAt = new DateTime(2026, 6, 13, 22, 44, 1, 513, DateTimeKind.Utc).AddTicks(3563),
                             Description = "Sample Developer Description",
                             FirstName = "FirstName",
                             ImageName = "default.png",
@@ -88,36 +91,6 @@ namespace Portfolio.Data.Migrations
                             isDeleted = false,
                             isFreelanceAvailable = true
                         });
-                });
-
-            modelBuilder.Entity("Portfolio.Core.Models.Resume", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Filename")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsLast")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Resumes");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,12 +13,12 @@
                 <p>
                     @Model.Author.Info
                 </p>
-                <a href="~/assets/documents/DOC-20231229-WA0063"
+                <a href="~/assets/files/resumes/@Model.Resume.Filename"
                    class="btn"
                    download="">Download CV</a>
             </div>
             <div class="home-img padd-15">
-                <img src="@Model.Author.ImageURL"
+                <img src="~/assets/images/authors/@Model.Author.ImageName"
                      alt="My image" />
             </div>
         </div>

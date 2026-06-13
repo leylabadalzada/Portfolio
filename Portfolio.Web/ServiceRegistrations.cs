@@ -8,8 +8,9 @@ namespace Portfolio.Web
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IResumeService, ResumeService>();
 
-            services.AddHttpContextAccessor();
+            //services.AddHttpContextAccessor();
             return services;
         }
     }

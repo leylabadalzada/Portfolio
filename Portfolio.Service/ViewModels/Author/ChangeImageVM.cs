@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Portfolio.Service.DTOs.Author
+namespace Portfolio.Service.ViewModels.Author
 {
-    public record ChangeImageDto
+    public record ChangeImageVM
     {
         public IFormFile NewImage { get; set; }
     }

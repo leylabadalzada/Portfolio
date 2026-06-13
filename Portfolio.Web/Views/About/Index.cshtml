@@ -1,4 +1,6 @@
-﻿<section class="about section" id="about">
+﻿@model AboutVM
+
+<section class="about section" id="about">
     <div class="container">
         <div class="row">
             <div class="section-title padd-15">
@@ -9,18 +11,9 @@
             <div class="about-content padd-15">
                 <div class="row">
                     <div class="about-text padd-15">
-                        <h3>I am Leyla Heydarova <span>Backend Developer</span></h3>
+                        <h3>I am @Model.Author.FullName <span>Backend Developer</span></h3>
                         <p>
-                            I'm an experienced Backend Developer specializing in
-                            building scalable, high-performance server-side
-                            applications. My expertise lies in C# and ASP.NET, where I
-                            leverage these powerful technologies to develop efficient
-                            and reliable backend solutions. I am committed to
-                            delivering high-quality solutions that meet business
-                            requirements and exceed client expectations. My approach
-                            is grounded in continuous learning and adapting to the
-                            latest technological advancements, ensuring that my skills
-                            and solutions remain cutting-edge.
+                            @Model.Author.Description
                         </p>
                     </div>
                 </div>
@@ -30,11 +23,11 @@
                         <div class="row">
                             <div class="info-item padd-15">
                                 <i class="fa-regular fa-calendar"></i>
-                                <p>Birthday: <span>2 apr 2000</span></p>
+                                <p>Birthday: <span>@Model.Author.BirthDate.ToString("d MMM yyyy")</span></p>
                             </div>
                             <div class="info-item padd-15">
                                 <i class="fa-solid fa-location-dot"></i>
-                                <p>Location: <span>Baku, Azerbaijan</span></p>
+                                <p>Location: <span>@Model.Author.Location</span></p>
                             </div>
                             <div class="info-item padd-15">
                                 <i class="fa-regular fa-envelope"></i>
@@ -58,7 +51,10 @@
                             </div>
                             <div class="info-item padd-15">
                                 <i class="fa-solid fa-laptop-file"></i>
-                                <p>Freelance: <span>Available</span></p>
+                                <p>
+                                    Freelance:
+                                    <span>@(Model.Author.isFreelanceAvailable ? "Available" : "Unavailable")</span>
+                                </p>
                             </div>
                         </div>
                         <div class="row">

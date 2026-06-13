@@ -1,0 +1,12 @@
+﻿@model ResumeCreateVM
+<div class="container">
+    <form asp-controller="resume" asp-action="create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="File">Image</label>
+            <input asp-for="File" type="file" class="form-control" aria-describedby="emailHelp">
+            @* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> *@
+        </div>
+        <a class="btn btn-ordinary" asp-action="index">Cancel</a>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>

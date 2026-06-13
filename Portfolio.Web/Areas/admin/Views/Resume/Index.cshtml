@@ -1,0 +1,27 @@
+﻿@model List<ResumeGetVM>
+
+<div class="container">
+    <a class="btn btn-success" asp-action="create">Create</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">File</th>
+                <th scope="col">IsLast</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var resume in Model)
+            {
+                <tr>
+                    <th scope="row">@resume.Id</th>
+                    <td>@resume.Filename</td>
+                    <td>@resume.IsLast</td>
+                    <td>Update Remove</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

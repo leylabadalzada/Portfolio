@@ -1,12 +1,12 @@
-﻿using Portfolio.Service.DTOs.Author;
+﻿using Portfolio.Service.ViewModels.Author;
 
 namespace Portfolio.Service.Services.Abstractions
 {
     public interface IAuthorService
     {
-        Task<bool> ChangeImageAsync(ChangeImageDto dto);
-        Task<bool> CreateAsync(AuthorCreateDto dto);
-        Task<List<AuthorGetDto>> GetAllAsync();
-        Task<AuthorGetDto> GetAsync();
+        Task<bool> ChangeImageAsync(ChangeImageVM vm);
+        Task<List<AuthorGetVM>> GetAllAsync();
+        Task<AuthorGetVM> GetAsync();
+        Task<bool> UpdateAsync(AuthorUpdateVM vm);
     }
 }

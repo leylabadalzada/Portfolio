@@ -2,14 +2,22 @@
 using Portfolio.Core.Constants;
 using Portfolio.Core.Models;
 using Portfolio.Core.Models.BaseModels;
+using Portfolio.Data.Seeders;
 
 namespace Portfolio.Data.Contexts
 {
     public class AppDbContext : DbContext
     {
         public DbSet<Author> Authors { get; set; }
+        public DbSet<Resume> Resumes { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.SeedAuthor();
+            base.OnModelCreating(modelBuilder);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

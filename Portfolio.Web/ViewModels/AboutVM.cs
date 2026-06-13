@@ -1,11 +1,9 @@
 ﻿using Portfolio.Service.ViewModels.Author;
-using Portfolio.Service.ViewModels.Resumes;
 
 namespace Portfolio.Web.ViewModels
 {
-    public class HomeVM
+    public class AboutVM
     {
         public AuthorGetVM Author { get; set; }
-        public ResumeGetVM Resume { get; set; }
     }
 }
