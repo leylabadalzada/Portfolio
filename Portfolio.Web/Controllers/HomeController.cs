@@ -20,7 +20,7 @@ namespace Portfolio.Web.Controllers
             var vm = new HomeVM()
             {
                 Author = await _authorService.GetAsync(),
-                Resume = await _resumeService.GetLastResumeAsync()
+                Resume = await _resumeService.GetSelectedResumeAsync()
             };
             return View(vm);
         }

@@ -8,6 +8,8 @@
                 <th scope="col">Id</th>
                 <th scope="col">File</th>
                 <th scope="col">IsLast</th>
+                <th scope="col">CreatedAt</th>
+                <th scope="col">UpdatedAt</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -18,10 +20,26 @@
                     <th scope="row">@resume.Id</th>
                     <td>@resume.Filename</td>
                     <td>@resume.IsLast</td>
-                    <td>Update Remove</td>
+                    <td>@resume.CreatedAt</td>
+                    <td>@resume.UpdatedAt</td>
+                    <td class="text-center">
+                        <div class="d-flex gap-3 align-items-center">
+                            <form asp-action="selectresume" method="post" asp-route-id="@resume.Id" class="m-0">
+                                <button type="submit" class="btn p-0 border-0 bg-transparent">
+                                    <i class="fa-solid fa-circle-check text-success fs-4"></i>
+                                </button>
+                            </form>
+
+                            <form asp-action="remove" method="post" asp-route-id="@resume.Id" class="m-0">
+                                <button type="submit" class="btn p-0 border-0 bg-transparent">
+                                    <i class="fa-solid fa-trash text-danger fs-4"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-
+    <a class="btn btn-ordinary" asp-area="admin" asp-controller="dashboard" asp-action="index">Go Dashboard</a>
 </div>

@@ -32,6 +32,17 @@ namespace Portfolio.Web.Areas.admin.Controllers
             return result ? RedirectToAction(nameof(Index)) : View(vm);
         }
 
-
+        [HttpPost]
+        public async Task<IActionResult> SelectResumeAsync(Guid id)
+        {
+            var result = await _service.SelectResumeAsync(id);
+            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Remove(Guid id)
+        {
+            var result = await _service.RemoveAsync(id);
+            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+        }
     }
 }

@@ -5,6 +5,6 @@ namespace Portfolio.Core.Models
     public class Resume : BaseEntity
     {
         public string Filename { get; set; }
-        public bool IsLast { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

@@ -28,7 +28,9 @@ namespace Portfolio.Service.Extensions
             {
                 Id = resume.ID.ToString(),
                 Filename = resume.Filename,
-                IsLast = resume.IsLast
+                IsLast = resume.IsSelected,
+                CreatedAt = resume.CreatedAt,
+                UpdatedAt = resume.UpdatedAt
             };
         }
     }

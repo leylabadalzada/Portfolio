@@ -109,7 +109,7 @@ namespace Portfolio.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsLast")
+                    b.Property<bool>("IsSelected")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("UpdatedAt")

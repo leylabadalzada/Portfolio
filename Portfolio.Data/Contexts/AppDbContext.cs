@@ -35,16 +35,50 @@ namespace Portfolio.Data.Contexts
                     entry.Entity.CreatedAt = now;
                 }
 
-                else if (entry.State == EntityState.Modified && entry.Entity.isDeleted)
-                {
-                    entry.Entity.DeletedAt = now;
-                }
-
                 else if (entry.State == EntityState.Modified)
                 {
                     entry.Entity.UpdatedAt = now;
                 }
             }
+            #endregion
+            #region Resume
+
+            var currentResume = ChangeTracker.Entries<Resume>()
+                .FirstOrDefault(e =>
+                    e.Entity.IsSelected &&
+                    (e.State == EntityState.Added ||
+                     e.State == EntityState.Modified));
+
+            if (currentResume != null)
+            {
+                var otherResumes = Set<Resume>()
+                    .Where(r => r.ID != currentResume.Entity.ID && r.IsSelected)
+                    .ToList();
+
+                foreach (var resume in otherResumes)
+                {
+                    resume.IsSelected = false;
+                }
+            }
+
+            var deletedResume = ChangeTracker.Entries<Resume>()
+                .FirstOrDefault(e =>
+                    e.State == EntityState.Deleted &&
+                    e.Entity.IsSelected);
+
+            if (deletedResume != null)
+            {
+                var newestResume = Set<Resume>()
+                    .Where(r => r.ID != deletedResume.Entity.ID)
+                    .OrderByDescending(r => r.CreatedAt)
+                    .FirstOrDefault();
+
+                if (newestResume != null)
+                {
+                    newestResume.IsSelected = true;
+                }
+            }
+
             #endregion
             return base.SaveChangesAsync(cancellationToken);
         }

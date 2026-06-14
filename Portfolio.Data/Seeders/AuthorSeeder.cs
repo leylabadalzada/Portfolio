@@ -12,7 +12,6 @@ namespace Portfolio.Data.Seeders
             {
                 ImageName = "default.png",
                 Info = "Sample Developer Information",
-                isDeleted = false,
                 FirstName = "FirstName",
                 LastName = "Lastname",
                 Location = "Location",

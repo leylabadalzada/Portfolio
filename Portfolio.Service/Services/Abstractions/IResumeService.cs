@@ -6,7 +6,9 @@ namespace Portfolio.Service.Services.Abstractions
     {
         Task<bool> CreateAsync(ResumeCreateVM vm);
         public Task<List<ResumeGetVM>> GetAsync(bool isFiltered);
-        Task<ResumeGetVM> GetLastResumeAsync();
+        Task<ResumeGetVM> GetSelectedResumeAsync();
+        Task<bool> RemoveAsync(Guid id);
+        Task<bool> SelectResumeAsync(Guid id);
     }
 }
 
