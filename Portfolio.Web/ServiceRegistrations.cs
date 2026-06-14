@@ -9,8 +9,8 @@ namespace Portfolio.Web
         {
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IResumeService, ResumeService>();
+            services.AddScoped<ISpecialityService, SpecialityService>();
 
-            //services.AddHttpContextAccessor();
             return services;
         }
     }

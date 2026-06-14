@@ -1,10 +1,10 @@
-/* ========================= typing animation =========================*/
-var typed = new Typed(".typing", {
-    strings:["","Web Software Engineer", "Frontend Developer"],
-    typeSpeed:100,
-    BackSpeed:60,
-    loop:true
-})
+///* ========================= typing animation =========================*/
+//var typed = new Typed(".typing", {
+//    strings:["","Web Software Engineer", "Frontend Developer"],
+//    typeSpeed:100,
+//    BackSpeed:60,
+//    loop:true
+//})
 
 /* ========================= Aside =========================*/
 const nav = document.querySelector(".nav"),
@@ -63,13 +63,13 @@ function updateNav(element){
     }  
 }
 
-document.querySelector(".hire-me").addEventListener("click", function(){
-    const sectionIndex = this.getAttribute("data-section-index");
-    showSection(this);
-    updateNav(this);
-    removeBackSection();
-    addBackSection(sectionIndex);
-})
+//document.querySelector(".hire-me").addEventListener("click", function(){
+//    const sectionIndex = this.getAttribute("data-section-index");
+//    showSection(this);
+//    updateNav(this);
+//    removeBackSection();
+//    addBackSection(sectionIndex);
+//})
 
 const navTogglerBtn = document.querySelector(".nav-toggler"),
 aside = document.querySelector(".aside");

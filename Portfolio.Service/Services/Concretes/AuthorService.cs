@@ -29,7 +29,7 @@ namespace Portfolio.Service.Services.Concretes
 
         public async Task<AuthorGetVM> GetAsync()
         {
-            var author = await _context.Authors.FirstOrDefaultAsync();
+            var author = await _context.Authors.AsNoTracking().FirstOrDefaultAsync();
             if (author == null) throw new NotFoundException("Author");
             return author.ToAuthorGetVM();
         }

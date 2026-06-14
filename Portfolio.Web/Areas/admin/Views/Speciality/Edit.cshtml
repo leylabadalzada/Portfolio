@@ -1,0 +1,12 @@
+﻿@model SpecialityUpdateVM
+
+<div class="container">
+    <form asp-controller="speciality" asp-action="edit" method="post">
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <a class="btn btn-ordinary" asp-action="index">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>

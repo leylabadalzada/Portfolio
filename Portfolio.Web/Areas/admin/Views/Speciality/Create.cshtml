@@ -1,0 +1,16 @@
+﻿@model SpecialityCreateVM
+
+<div class="container">
+    <form asp-controller="speciality" asp-action="create" method="post">
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="form-check">
+            <input asp-for="IsMain" class="form-check-input" />
+            <label asp-for="IsMain" class="form-check-label"></label>
+        </div>
+        <a class="btn btn-ordinary" asp-action="index">Cancel</a>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>

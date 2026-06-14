@@ -10,6 +10,7 @@ namespace Portfolio.Data.Contexts
     {
         public DbSet<Author> Authors { get; set; }
         public DbSet<Resume> Resumes { get; set; }
+        public DbSet<Speciality> Specialities { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -41,6 +42,7 @@ namespace Portfolio.Data.Contexts
                 }
             }
             #endregion
+            #region Unique True
             #region Resume
 
             var currentResume = ChangeTracker.Entries<Resume>()
@@ -79,6 +81,46 @@ namespace Portfolio.Data.Contexts
                 }
             }
 
+            #endregion
+            #region Speciality
+
+            var currentSpeciality = ChangeTracker.Entries<Speciality>()
+                .FirstOrDefault(e =>
+                    e.Entity.IsMain &&
+                    (e.State == EntityState.Added ||
+                     e.State == EntityState.Modified));
+
+            if (currentSpeciality != null)
+            {
+                var otherResumes = Set<Speciality>()
+                    .Where(r => r.ID != currentSpeciality.Entity.ID && r.IsMain)
+                    .ToList();
+
+                foreach (var resume in otherResumes)
+                {
+                    resume.IsMain = false;
+                }
+            }
+
+            var deletedSpeciality = ChangeTracker.Entries<Speciality>()
+                .FirstOrDefault(e =>
+                    e.State == EntityState.Deleted &&
+                    e.Entity.IsMain);
+
+            if (deletedSpeciality != null)
+            {
+                var newestSpecialtiy = Set<Speciality>()
+                    .Where(r => r.ID != deletedSpeciality.Entity.ID)
+                    .OrderByDescending(r => r.CreatedAt)
+                    .FirstOrDefault();
+
+                if (newestSpecialtiy != null)
+                {
+                    newestSpecialtiy.IsMain = true;
+                }
+            }
+
+            #endregion
             #endregion
             return base.SaveChangesAsync(cancellationToken);
         }

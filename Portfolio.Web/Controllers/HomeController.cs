@@ -8,11 +8,13 @@ namespace Portfolio.Web.Controllers
     {
         readonly IAuthorService _authorService;
         readonly IResumeService _resumeService;
+        readonly ISpecialityService _specialityService;
 
-        public HomeController(IAuthorService authorService, IResumeService resumeService)
+        public HomeController(IAuthorService authorService, IResumeService resumeService, ISpecialityService specialityService)
         {
             _authorService = authorService;
             _resumeService = resumeService;
+            _specialityService = specialityService;
         }
 
         public async Task<IActionResult> Index()
@@ -20,7 +22,8 @@ namespace Portfolio.Web.Controllers
             var vm = new HomeVM()
             {
                 Author = await _authorService.GetAsync(),
-                Resume = await _resumeService.GetSelectedResumeAsync()
+                Resume = await _resumeService.GetSelectedResumeAsync(),
+                Specialities = await _specialityService.GetAsync()
             };
             return View(vm);
         }

@@ -5,5 +5,6 @@ namespace Portfolio.Web.ViewModels
     public class AboutVM
     {
         public AuthorGetVM Author { get; set; }
+        public string Speciality { get; set; }
     }
 }

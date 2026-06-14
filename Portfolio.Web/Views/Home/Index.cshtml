@@ -7,16 +7,22 @@
                 <h3 class="hello">
                     Hello, I am <span class="name">@Model.Author.FullName</span>
                 </h3>
+
                 <h3 class="my-profession">
-                    <span class="typing">Backend Developer</span>
+                    <span class="typing"></span>
                 </h3>
+
                 <p>
                     @Model.Author.Info
                 </p>
+
                 <a href="~/assets/files/resumes/@Model.Resume.Filename"
-                   class="btn"
-                   download="">Download CV</a>
+                       class="btn"
+                       download>
+                    Download CV
+                </a>
             </div>
+
             <div class="home-img padd-15">
                 <img src="~/assets/images/authors/@Model.Author.ImageName"
                      alt="My image" />
@@ -24,3 +30,17 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        new Typed(".typing", {
+            strings: [
+                @Html.Raw(string.Join(",",
+                        Model.Specialities.Select(x => $"\"{x.Name}\"")))
+            ],
+            typeSpeed: 100,
+            backSpeed: 60,
+            loop: true
+        });
+    </script>
+}

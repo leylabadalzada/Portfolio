@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portfolio.Service.Services.Abstractions;
-using Portfolio.Service.ViewModels.Resumes;
+using Portfolio.Service.ViewModels.Speciality;
 
 namespace Portfolio.Web.Areas.admin.Controllers
 {
     [Area("admin")]
-    public class ResumeController : Controller
+    public class SpecialityController : Controller
     {
-        readonly IResumeService _service;
+        readonly ISpecialityService _service;
 
-        public ResumeController(IResumeService service)
+        public SpecialityController(ISpecialityService service)
         {
             _service = service;
         }
@@ -25,23 +25,37 @@ namespace Portfolio.Web.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ResumeCreateVM vm)
+        public async Task<IActionResult> Create(SpecialityCreateVM vm)
         {
-            if (!ModelState.IsValid) return View(vm);
             var result = await _service.CreateAsync(vm);
             return result ? RedirectToAction(nameof(Index)) : View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> SelectResumeAsync(Guid id)
+        public async Task<IActionResult> SetMain(Guid id)
         {
-            var result = await _service.SelectResumeAsync(id);
+            var result = await _service.SetMainAsync(id);
             return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
         }
+
         [HttpPost]
         public async Task<IActionResult> Remove(Guid id)
         {
             var result = await _service.RemoveAsync(id);
+            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+        }
+
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var vm = new SpecialityUpdateVM() { Name = await _service.GetSpecialityAsync(id) };
+            return View(vm);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Guid id, SpecialityUpdateVM vm)
+        {
+            var result = await _service.UpdateAsync(id, vm);
             return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
         }
     }

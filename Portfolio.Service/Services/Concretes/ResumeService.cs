@@ -21,9 +21,9 @@ namespace Portfolio.Service.Services.Concretes
             _env = env;
         }
 
-        public async Task<List<ResumeGetVM>> GetAsync(bool isFiltered)
+        public async Task<List<ResumeGetVM>> GetAsync()
         {
-            var resumes = isFiltered ? await _context.Resumes.OrderByDescending(r => r.CreatedAt).ToListAsync() : await _context.Resumes.OrderByDescending(r => r.CreatedAt).ToListAsync();
+            var resumes = await _context.Resumes.AsNoTracking().OrderByDescending(r => r.CreatedAt).ToListAsync();
             return resumes.Select(r => r.ToResumeGetVM()).ToList();
         }
 
@@ -42,7 +42,7 @@ namespace Portfolio.Service.Services.Concretes
 
         public async Task<ResumeGetVM> GetSelectedResumeAsync()
         {
-            var resume = await _context.Resumes.FirstOrDefaultAsync(r => r.IsSelected);
+            var resume = await _context.Resumes.AsNoTracking().FirstOrDefaultAsync(r => r.IsSelected);
             return resume.ToResumeGetVM();
         }
 

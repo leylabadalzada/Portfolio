@@ -1,6 +1,7 @@
 ﻿using Portfolio.Core.Models;
 using Portfolio.Service.ViewModels.Author;
 using Portfolio.Service.ViewModels.Resumes;
+using Portfolio.Service.ViewModels.Speciality;
 
 namespace Portfolio.Service.Extensions
 {
@@ -28,9 +29,21 @@ namespace Portfolio.Service.Extensions
             {
                 Id = resume.ID.ToString(),
                 Filename = resume.Filename,
-                IsLast = resume.IsSelected,
+                IsSelected = resume.IsSelected,
                 CreatedAt = resume.CreatedAt,
                 UpdatedAt = resume.UpdatedAt
+            };
+        }
+
+        public static SpecialityGetVM ToSpecialityGetVM(this Speciality speciality)
+        {
+            return new SpecialityGetVM
+            {
+                Id = speciality.ID.ToString(),
+                CreatedAt = speciality.CreatedAt,
+                IsMain = speciality.IsMain,
+                Name = speciality.Name,
+                UpdatedAt = speciality.UpdatedAt
             };
         }
     }
