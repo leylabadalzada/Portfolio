@@ -1,44 +1,44 @@
-﻿@model List<SpecialityGetVM>
+﻿@model List<SocialMediaGetVM>
 
 <div class="container">
-    <h2>Specialities</h2>
+    <h2>Social Medias</h2>
     <a class="btn btn-success" asp-action="create">Create</a>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Main</th>
+                <th scope="col">Social Media</th>
+                <th scope="col">Username</th>
+                <th scope="col">URL</th>
                 <th scope="col">CreatedAt</th>
                 <th scope="col">UpdatedAt</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var speciality in Model)
+            @foreach (var media in Model)
             {
                 <tr>
-                    <th scope="row">@speciality.Id</th>
-                    <td>@speciality.Name</td>
-                    <td>@speciality.IsMain</td>
-                    <td>@speciality.CreatedAt</td>
-                    <td>@speciality.UpdatedAt</td>
-                    <td class="text-center">
-                        <div class="d-flex gap-3 align-items-center">
-                            
-                            <form asp-action="setmain" method="post" asp-route-id="@speciality.Id" class="m-0">
+                    <th scope="row">@media.Id</th>
+                    <td>@media.SocialMediaName</td>
+                    <td>@media.UserName</td>
+                    <td>@media.Url</td>
+                    <td>@media.CreatedAt</td>
+                    <td>@media.UpdatedAt</td>
+                    <td class="text-center"> hh
+                        @* <div class="d-flex gap-3 align-items-center">
+                            <form asp-action="selectresume" method="post" asp-route-id="@resume.Id" class="m-0">
                                 <button type="submit" class="btn p-0 border-0 bg-transparent">
                                     <i class="fa-solid fa-circle-check text-success fs-4"></i>
                                 </button>
                             </form>
 
-                            <form asp-action="remove" method="post" asp-route-id="@speciality.Id" class="m-0">
+                            <form asp-action="remove" method="post" asp-route-id="@resume.Id" class="m-0">
                                 <button type="submit" class="btn p-0 border-0 bg-transparent">
                                     <i class="fa-solid fa-trash text-danger fs-4"></i>
                                 </button>
-                            </form>
-                            <a asp-action="edit" asp-route-id="@speciality.Id"><i class="fa-solid fa-pen"></i></a>
-                        </div>
+                            </form> 
+                        </div>*@
                     </td>
                 </tr>
             }

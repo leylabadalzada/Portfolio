@@ -61,6 +61,7 @@ namespace Portfolio.Service.Services.Concretes
             author.Info = vm.Info;
             author.Description = vm.Description;
             author.Location = vm.Location;
+            author.Email = vm.Email;
             author.isFreelanceAvailable = vm.isFreelanceAvailable.Value;
             author.BirthDate = DateOnlyUtils.GenerateDate(vm.BirthDate.Day, vm.BirthDate.Month, vm.BirthDate.Year);
             var result = _context.Update(author);

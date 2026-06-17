@@ -15,7 +15,8 @@ namespace Portfolio.Data.Seeders
                 FirstName = "FirstName",
                 LastName = "Lastname",
                 Location = "Location",
-                BirthDate = new DateOnly(2000, 04, 02),
+                Email = "email@sample.domain",
+                BirthDate = DateOnly.MinValue,
                 Description = "Sample Developer Description",
                 CreatedAt = TimeConstants.AzerbaijaniTime,
                 isFreelanceAvailable = true

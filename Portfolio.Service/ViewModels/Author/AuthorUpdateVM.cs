@@ -6,6 +6,7 @@ namespace Portfolio.Service.ViewModels.Author
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public string? Email { get; set; }
         public DateVM? BirthDate { get; set; }
         public string? Location { get; set; }
         public string? Info { get; set; } //homepage introduction

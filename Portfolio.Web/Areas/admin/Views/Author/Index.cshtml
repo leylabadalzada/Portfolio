@@ -1,12 +1,14 @@
 ﻿@model AuthorGetVM
 
 <div class="container">
+    <h2>Author</h2>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">FirstName</th>
                 <th scope="col">LastName</th>
+                <th scope="col">Email</th>
                 <th scope="col">Info</th>
                 <th scope="col">Description</th>
                 <th scope="col">Location</th>
@@ -20,6 +22,7 @@
                 <th scope="row">@Model.Id</th>
                 <td>@Model.FirstName</td>
                 <td>@Model.LastName</td>
+                <td>@Model.Email</td>
                 <td>@Model.Info</td>
                 <td>@Model.Description</td>
                 <td>@Model.Location</td>

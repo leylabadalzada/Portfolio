@@ -1,6 +1,7 @@
 ﻿using Portfolio.Core.Models;
 using Portfolio.Service.ViewModels.Author;
 using Portfolio.Service.ViewModels.Resumes;
+using Portfolio.Service.ViewModels.SocialMedia;
 using Portfolio.Service.ViewModels.Speciality;
 
 namespace Portfolio.Service.Extensions
@@ -17,6 +18,7 @@ namespace Portfolio.Service.Extensions
                 Description = author.Description,
                 FirstName = author.FirstName,
                 LastName = author.LastName,
+                Email = author.Email,
                 Info = author.Info,
                 isFreelanceAvailable = author.isFreelanceAvailable,
                 ImageName = author.ImageName
@@ -44,6 +46,19 @@ namespace Portfolio.Service.Extensions
                 IsMain = speciality.IsMain,
                 Name = speciality.Name,
                 UpdatedAt = speciality.UpdatedAt
+            };
+        }
+
+        public static SocialMediaGetVM ToSocialMediaGetVM(this SocialMedia socialMedia)
+        {
+            return new SocialMediaGetVM
+            {
+                Id = socialMedia.ID.ToString(),
+                SocialMediaName = socialMedia.SocialMediaName,
+                Url = socialMedia.Url,
+                UserName = socialMedia.UserName,
+                CreatedAt = socialMedia.CreatedAt,
+                UpdatedAt = socialMedia.UpdatedAt
             };
         }
     }

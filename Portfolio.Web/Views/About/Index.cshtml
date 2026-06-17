@@ -31,24 +31,19 @@
                             </div>
                             <div class="info-item padd-15">
                                 <i class="fa-regular fa-envelope"></i>
-                                <p>Email: <span>lbadalzade@gmail.com</span></p>
+                                <p>Email: <span>@Model.Author.Email</span></p>
                             </div>
-                            <div class="info-item padd-15">
-                                <i class="fa-brands fa-github"></i>
-                                <p>
-                                    GitHub:
-                                    <a href="https://github.com/leylaheydarova"
-                                       title="Click on">leylaheydarova</a>
-                                </p>
-                            </div>
-                            <div class="info-item padd-15">
-                                <i class="fa-brands fa-linkedin"></i>
-                                <p>
-                                    LinkedIn:
-                                    <a href="https://www.linkedin.com/in/leyla-heydarova"
-                                       title="Click on">Leyla Heydarova</a>
-                                </p>
-                            </div>
+                            @foreach(var sm in Model.SocialMedias)
+                            {
+                                <div class="info-item padd-15">
+                                    <p>
+                                        @sm.SocialMediaName:
+                                        <a href="@sm.Url"
+                                           title="Click on">@sm.UserName</a>
+                                    </p>
+                                </div>
+                            }
+
                             <div class="info-item padd-15">
                                 <i class="fa-solid fa-laptop-file"></i>
                                 <p>

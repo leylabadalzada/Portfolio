@@ -29,6 +29,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
                 FirstName = author.FirstName,
                 LastName = author.LastName,
                 Location = author.Location,
+                Email = author.Email,
                 Info = author.Info,
                 isFreelanceAvailable = author.isFreelanceAvailable,
                 BirthDate = new DateVM

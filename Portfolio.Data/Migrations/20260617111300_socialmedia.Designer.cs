@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Portfolio.Data.Contexts;
@@ -11,9 +12,11 @@ using Portfolio.Data.Contexts;
 namespace Portfolio.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260617111300_socialmedia")]
+    partial class socialmedia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,10 +38,6 @@ namespace Portfolio.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -74,11 +73,10 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("3aaed6fb-8d16-40fe-a479-725822fd0e69"),
-                            BirthDate = new DateOnly(1, 1, 1),
-                            CreatedAt = new DateTime(2026, 6, 17, 16, 0, 17, 902, DateTimeKind.Utc).AddTicks(4845),
+                            ID = new Guid("f8ffb0ef-57da-4cb8-8558-160fe3aebc61"),
+                            BirthDate = new DateOnly(2000, 4, 2),
+                            CreatedAt = new DateTime(2026, 6, 17, 15, 12, 56, 454, DateTimeKind.Utc).AddTicks(8986),
                             Description = "Sample Developer Description",
-                            Email = "email@sample.domain",
                             FirstName = "FirstName",
                             ImageName = "default.png",
                             Info = "Sample Developer Information",

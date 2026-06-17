@@ -10,6 +10,7 @@ namespace Portfolio.Web
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IResumeService, ResumeService>();
             services.AddScoped<ISpecialityService, SpecialityService>();
+            services.AddScoped<ISocialMediaService, SocialMediaService>();
 
             return services;
         }
