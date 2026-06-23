@@ -33,11 +33,45 @@ namespace Portfolio.Web.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SocialMediaCreateVM vm)
+        public async Task<IActionResult> Create(SocialMediaCreateOrUpdateVM vm)
         {
             if (!ModelState.IsValid) return View(vm);
             var result = await _service.CreateAsync(vm);
             return result ? RedirectToAction(nameof(Index)) : View(vm);
+        }
+
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var media = await _service.GetByIdAsync(id);
+            var vm = new SocialMediaCreateOrUpdateVM()
+            {
+                SocialMediaName = media.SocialMediaName,
+                Url = media.Url,
+                UserName = media.UserName
+            };
+            ViewBag.Names = Enum.GetValues<SocialMediaName>()
+                .Select(sm => new SelectListItem
+                {
+                    Text = sm.ToString(),
+                    Value = sm.ToString()
+                });
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Guid id, SocialMediaCreateOrUpdateVM vm)
+        {
+            if (!ModelState.IsValid) return View(vm);
+
+            var result = await _service.UpdateAsync(id, vm);
+            return result ? RedirectToAction(nameof(Index)) : View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(Guid id)
+        {
+            var result = await _service.RemoveAsync(id);
+            return result ? RedirectToAction(nameof(Index)) : BadRequest("Remove failed!");
         }
     }
 }

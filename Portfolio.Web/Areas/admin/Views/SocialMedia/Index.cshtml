@@ -25,20 +25,18 @@
                     <td>@media.Url</td>
                     <td>@media.CreatedAt</td>
                     <td>@media.UpdatedAt</td>
-                    <td class="text-center"> hh
-                        @* <div class="d-flex gap-3 align-items-center">
-                            <form asp-action="selectresume" method="post" asp-route-id="@resume.Id" class="m-0">
-                                <button type="submit" class="btn p-0 border-0 bg-transparent">
-                                    <i class="fa-solid fa-circle-check text-success fs-4"></i>
-                                </button>
-                            </form>
+                    <td class="text-center"> 
+                        <div class="d-flex gap-3 align-items-center">
+                            <a class="btn p-0 border-0 bg-transparent" asp-controller="socialmedia" asp-action="update" asp-route-id="@media.Id">
+                                <i class="fa-solid fa-edit text-warning"></i>
+                            </a>
 
-                            <form asp-action="remove" method="post" asp-route-id="@resume.Id" class="m-0">
+                            <form asp-action="remove" method="post" asp-route-id="@media.Id" class="m-0">
                                 <button type="submit" class="btn p-0 border-0 bg-transparent">
                                     <i class="fa-solid fa-trash text-danger fs-4"></i>
                                 </button>
                             </form> 
-                        </div>*@
+                        </div>
                     </td>
                 </tr>
             }

@@ -1,9 +1,9 @@
 ﻿@model SocialMediaCreateOrUpdateVM
 
-<h3>Add Social Media</h3>
+<h3>Update Social Media</h3>
 <div class="container">
 
-    <form asp-controller="socialmedia" asp-action="create" method="post">
+    <form asp-controller="socialmedia" asp-action="update" method="post">
         <div class="form-group">
             <label asp-for="SocialMediaName">Social Media</label>
             <select asp-for="SocialMediaName" asp-items="ViewBag.Names" class="form-control">
@@ -19,6 +19,6 @@
             <input asp-for="Url" class="form-control" aria-describedby="emailHelp">
         </div>
         <a class="btn btn-ordinary" asp-action="index">Cancel</a>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
