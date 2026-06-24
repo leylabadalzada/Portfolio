@@ -1,5 +1,6 @@
 ﻿using Portfolio.Core.Models;
 using Portfolio.Service.ViewModels.Author;
+using Portfolio.Service.ViewModels.Language;
 using Portfolio.Service.ViewModels.Resumes;
 using Portfolio.Service.ViewModels.SocialMedia;
 using Portfolio.Service.ViewModels.Speciality;
@@ -59,6 +60,19 @@ namespace Portfolio.Service.Extensions
                 UserName = socialMedia.UserName,
                 CreatedAt = socialMedia.CreatedAt,
                 UpdatedAt = socialMedia.UpdatedAt
+            };
+        }
+
+        public static LanguageGetVM ToLanguageGetVM(this Language language)
+        {
+            return new LanguageGetVM
+            {
+                Id = language.ID.ToString(),
+                CreatedAt = language.CreatedAt,
+                LevelName = language.Level.ToString(),
+                Level = language.Level,
+                Name = language.Name,
+                UpdatedAt = language.UpdatedAt
             };
         }
     }

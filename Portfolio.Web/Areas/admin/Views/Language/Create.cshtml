@@ -1,0 +1,19 @@
+﻿@model LanguageCreateOrUpdateVM
+
+<div class="container">
+    <h3>Create Language</h3>
+    <form asp-controller="language" asp-action="create" method="post">
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label asp-for="Level">Language Level</label>
+            <select asp-for="Level" asp-items="ViewBag.Levels" class="form-control">
+                <option value="">Choose</option>
+            </select>
+        </div>
+        <a class="btn btn-ordinary" asp-action="index">Cancel</a>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>

@@ -1,4 +1,5 @@
 ﻿using Portfolio.Service.ViewModels.Author;
+using Portfolio.Service.ViewModels.Language;
 using Portfolio.Service.ViewModels.SocialMedia;
 
 namespace Portfolio.Web.ViewModels
@@ -8,5 +9,6 @@ namespace Portfolio.Web.ViewModels
         public AuthorGetVM Author { get; set; }
         public string Speciality { get; set; }
         public List<SocialMediaGetVM> SocialMedias { get; set; }
+        public List<LanguageGetVM> Languages { get; set; }
     }
 }

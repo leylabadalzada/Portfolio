@@ -11,6 +11,7 @@ namespace Portfolio.Web
             services.AddScoped<IResumeService, ResumeService>();
             services.AddScoped<ISpecialityService, SpecialityService>();
             services.AddScoped<ISocialMediaService, SocialMediaService>();
+            services.AddScoped<ILanguageService, LanguageService>();
 
             return services;
         }

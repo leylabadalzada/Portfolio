@@ -9,13 +9,14 @@ namespace Portfolio.Web.Controllers
         readonly IAuthorService _authorService;
         readonly ISpecialityService _specialityService;
         readonly ISocialMediaService _socialMediaService;
+        readonly ILanguageService _languageService;
 
-
-        public AboutController(IAuthorService authorService, ISpecialityService specialityService, ISocialMediaService socialMediaService)
+        public AboutController(IAuthorService authorService, ISpecialityService specialityService, ISocialMediaService socialMediaService, ILanguageService languageService)
         {
             _authorService = authorService;
             _specialityService = specialityService;
             _socialMediaService = socialMediaService;
+            _languageService = languageService;
         }
 
         public async Task<IActionResult> Index()
@@ -24,7 +25,8 @@ namespace Portfolio.Web.Controllers
             {
                 Author = await _authorService.GetAsync(),
                 Speciality = await _specialityService.GetSpecialityAsync(),
-                SocialMedias = await _socialMediaService.GetAllAsync()
+                SocialMedias = await _socialMediaService.GetAllAsync(),
+                Languages = await _languageService.GetAllAsync(),
             };
             return View(vm);
         }

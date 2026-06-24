@@ -12,6 +12,7 @@ namespace Portfolio.Data.Contexts
         public DbSet<Resume> Resumes { get; set; }
         public DbSet<Speciality> Specialities { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<Language> Languages { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
