@@ -13,6 +13,7 @@ namespace Portfolio.Web
             services.AddScoped<ISocialMediaService, SocialMediaService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IExperienceService, ExperienceService>();
 
             return services;
         }

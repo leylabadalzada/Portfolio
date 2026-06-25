@@ -84,7 +84,10 @@
                                         <div class="timeline-item">
                                             <div class="circle-dot"></div>
                                             <h3 class="timeline-date">
-                                                <i class="fa fa-calendar"></i>@education.StartDate?.ToString("dd MMM yyyy") - @education.EndDate?.ToString("dd MMM yyyy")
+                                                <i class="fa fa-calendar"></i>@education.StartDate?.ToString("dd MMM yyyy") -
+                                                @(education.isContinuing
+                                                    ? "Present"
+                                                    : education.EndDate?.ToString("dd MMM yyyy"))
                                             </h3>
                                             <h4 class="timeline-title">
                                                 "@education.Speciality"
@@ -105,95 +108,25 @@
                             <div class="timeline-box padd-15">
                                 <div class="timeline shadow-dark">
                                     <!--timeline item-->
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2024
-                                        </h3>
-                                        <h4 class="timeline-title">
-                                            "Extensive Experience in API Development and
-                                            Integration"
-                                        </h4>
-                                        <p>
-                                            I have extensive experience in API development and
-                                            integration, having designed, implemented, and
-                                            maintaned numerous RESTful APIs and gRPC services.
-                                            My work involves ensuring seamless communication
-                                            between different system components, optimizing
-                                            performance, and adhering to best practices for
-                                            security and scalability. I have successfully
-                                            integrated various third-party APIs and have a
-                                            deep understanding of API lifecycle management,
-                                            from design an development to deployment and
-                                            monitoring.
-                                        </p>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2024
-                                        </h3>
-                                        <h4 class="timeline-title">
-                                            Expertise in MVC (Model-View-Controller) Project
-                                            Implementation
-                                        </h4>
-                                        <p>
-                                            I have substantial experience in implementing MVC
-                                            (Model-View-Controller) architecture for web
-                                            applications, primarily using ASP.NET. My work
-                                            involves designing modular and maintable code by
-                                            separating concerns across the model, view, and
-                                            controller layers. This approach ensures a clear
-                                            and organized codebase, enhances scalability, and
-                                            simplifies debugging and testing. I have
-                                            successfully delivered numerous projects
-                                            leveraging MVC, focusing on clean design,
-                                            efficient data handling, and seamless user
-                                            interfaces
-                                        </p>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2019-2024
-                                        </h3>
-                                        <h4 class="timeline-title">
-                                            In-Depth Frontend Development Course
-                                        </h4>
-                                        <p>
-                                            I have completed an in-depth frontend development
-                                            course that covered the latest technologies and
-                                            best practices in building dynamic and responsive
-                                            web interfaces. This training provided in HTML,
-                                            CSS, SCSS (SASS), JavaScript, Bootstrap, Tailwind,
-                                            along with advanced React, or Vue.js. I gained
-                                            hands-on experience in creating user-centric
-                                            designs, optimizing performance, and ensuring
-                                            cross-borwser compatibility, equipping me with the
-                                            skills to develop intuitive and high-quality
-                                            frontend solutions.
-                                        </p>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2017-2024
-                                        </h3>
-                                        <h4 class="timeline-title">
-                                            Expertise in Alorithm Analysis, Self-Search
-                                            Solutions, and Logical Problem-Solving
-                                        </h4>
-                                        <p>
-                                            My expertise includes evaluating and optimizing
-                                            algorithms to ensure performance and scalability,
-                                            designing custom solutions to address specific
-                                            challenges, and employing a methodical
-                                            problem-solving approach. This experience has
-                                            enabled me to create robust, high-performance
-                                            systems and contribute effectively to various
-                                            development projects.
-                                        </p>
-                                    </div>
+                                    @foreach(var experience in Model.Experiences)
+                                    {
+                                        <div class="timeline-item">
+                                            <div class="circle-dot"></div>
+                                            <h3 class="timeline-date">
+                                                <i class="fa fa-calendar"></i>@experience.StartDate?.ToString("dd MMM yyyy") -
+                                                @(experience.isContinuing
+                                                    ? "Present"
+                                                    : experience.EndDate?.ToString("dd MMM yyyy"))
+                                            </h3>
+                                            <h4 class="timeline-title">
+                                                @experience.Position
+                                            </h4>
+                                            <h5 class="fw-bold">@experience.Company</h5>
+                                            <p>
+                                                @experience.Description
+                                            </p>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>

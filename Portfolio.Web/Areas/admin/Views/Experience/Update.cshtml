@@ -1,20 +1,20 @@
-﻿@model EducationCreateOrUpdateVM
+﻿@model ExperienceCreateOrUpdateVM
 
 <div class="container">
-    <h3>Create Education</h3>
+    <h3>Create Experience</h3>
 
-    <form asp-controller="Education" asp-action="Create" method="post">
+    <form asp-controller="Experience" asp-action="Update" method="post">
 
         <div class="form-group mb-3">
-            <label asp-for="University">University</label>
-            <input asp-for="University" class="form-control" />
-            <span asp-validation-for="University" class="text-danger"></span>
+            <label asp-for="Company">Company</label>
+            <input asp-for="Company" class="form-control" />
+            <span asp-validation-for="Company" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
-            <label asp-for="Speciality">Speciality</label>
-            <input asp-for="Speciality" class="form-control" />
-            <span asp-validation-for="Speciality" class="text-danger"></span>
+            <label asp-for="Position">Position</label>
+            <input asp-for="Position" class="form-control" />
+            <span asp-validation-for="Position" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
@@ -55,7 +55,7 @@
         </div>
 
         <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
 

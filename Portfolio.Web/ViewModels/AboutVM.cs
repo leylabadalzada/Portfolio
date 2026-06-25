@@ -1,5 +1,6 @@
 ﻿using Portfolio.Service.ViewModels.Author;
 using Portfolio.Service.ViewModels.Education;
+using Portfolio.Service.ViewModels.Experience;
 using Portfolio.Service.ViewModels.Language;
 using Portfolio.Service.ViewModels.SocialMedia;
 
@@ -12,5 +13,6 @@ namespace Portfolio.Web.ViewModels
         public ICollection<SocialMediaGetVM> SocialMedias { get; set; } = new List<SocialMediaGetVM>();
         public ICollection<LanguageGetVM> Languages { get; set; } = new List<LanguageGetVM>();
         public ICollection<EducationGetVM> Education { get; set; } = new List<EducationGetVM>();
+        public ICollection<ExperienceGetVM> Experiences { get; set; } = new List<ExperienceGetVM>();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Portfolio.Core.Models;
 using Portfolio.Service.ViewModels.Author;
 using Portfolio.Service.ViewModels.Education;
+using Portfolio.Service.ViewModels.Experience;
 using Portfolio.Service.ViewModels.Language;
 using Portfolio.Service.ViewModels.Resumes;
 using Portfolio.Service.ViewModels.SocialMedia;
@@ -90,6 +91,22 @@ namespace Portfolio.Service.Extensions
                 University = education.University,
                 UpdatedAt = education.UpdatedAt,
                 CreatedAt = education.CreatedAt
+            };
+        }
+
+        public static ExperienceGetVM ToExperienceGetVM(this Experience experience)
+        {
+            return new ExperienceGetVM
+            {
+                Id = experience.ID.ToString(),
+                Description = experience.Description,
+                EndDate = experience.EndDate,
+                isContinuing = experience.isContinuing,
+                Position = experience.Position,
+                StartDate = experience.StartDate,
+                Company = experience.Company,
+                UpdatedAt = experience.UpdatedAt,
+                CreatedAt = experience.CreatedAt
             };
         }
     }
