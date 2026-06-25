@@ -6,8 +6,8 @@ namespace Portfolio.Service.Services.Abstractions
     {
         Task<bool> CreateAsync(SpecialityCreateVM vm);
         Task<List<SpecialityGetVM>> GetAsync();
-        Task<string> GetSpecialityAsync();
-        Task<string> GetSpecialityAsync(Guid id);
+        Task<string> GetAllAsync();
+        Task<string> GetAsync(Guid id);
         Task<bool> RemoveAsync(Guid id);
         Task<bool> SetMainAsync(Guid id);
         Task<bool> UpdateAsync(Guid id, SpecialityUpdateVM vm);

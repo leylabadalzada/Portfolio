@@ -2,7 +2,7 @@
 
 namespace Portfolio.Service.ViewModels.Author
 {
-    public class AuthorUpdateVM
+    public record AuthorUpdateVM
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

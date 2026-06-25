@@ -38,7 +38,7 @@ namespace Portfolio.Service.Services.Concretes
             return saveCount > 0;
         }
 
-        public async Task<string> GetSpecialityAsync()
+        public async Task<string> GetAllAsync()
         {
             var speciality = await _context.Specialities.AsNoTracking().FirstOrDefaultAsync(s => s.IsMain);
             if (speciality == null) throw new NotFoundException("speciality");
@@ -46,7 +46,7 @@ namespace Portfolio.Service.Services.Concretes
             return speciality.Name;
         }
 
-        public async Task<string> GetSpecialityAsync(Guid id)
+        public async Task<string> GetAsync(Guid id)
         {
             var speciality = await _context.Specialities.FindAsync(id);
             if (speciality == null) throw new NotFoundException("speciality");

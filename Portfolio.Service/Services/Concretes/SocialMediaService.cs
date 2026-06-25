@@ -32,7 +32,7 @@ namespace Portfolio.Service.Services.Concretes
 
         public async Task<List<SocialMediaGetVM>> GetAllAsync()
         {
-            return await _context.SocialMedias.AsNoTracking().Select(sm => sm.ToSocialMediaGetVM()).ToListAsync();
+            return await _context.SocialMedias.AsNoTracking().OrderByDescending(e => e.CreatedAt).Select(sm => sm.ToSocialMediaGetVM()).ToListAsync();
         }
 
         public async Task<bool> UpdateAsync(Guid id, SocialMediaCreateOrUpdateVM vm)
@@ -49,7 +49,7 @@ namespace Portfolio.Service.Services.Concretes
             return saveCount > 0;
         }
 
-        public async Task<SocialMediaGetVM> GetByIdAsync(Guid id)
+        public async Task<SocialMediaGetVM> GetAsync(Guid id)
         {
             var media = await _context.SocialMedias.FindAsync(id);
             if (media == null) throw new Exception("Social media not found");

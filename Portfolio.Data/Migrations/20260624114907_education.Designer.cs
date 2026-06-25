@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Portfolio.Data.Contexts;
@@ -11,9 +12,11 @@ using Portfolio.Data.Contexts;
 namespace Portfolio.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260624114907_education")]
+    partial class education
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,9 +77,9 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("4109a30b-ff5c-4c46-bb50-7783c8ca5c92"),
+                            ID = new Guid("046220d8-a8cb-4620-8aa6-95823de222be"),
                             BirthDate = new DateOnly(1, 1, 1),
-                            CreatedAt = new DateTime(2026, 6, 24, 15, 50, 37, 375, DateTimeKind.Utc).AddTicks(4172),
+                            CreatedAt = new DateTime(2026, 6, 24, 15, 49, 6, 319, DateTimeKind.Utc).AddTicks(1906),
                             Description = "Sample Developer Description",
                             Email = "email@sample.domain",
                             FirstName = "FirstName",
@@ -101,15 +104,15 @@ namespace Portfolio.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateOnly?>("EndDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Speciality")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateOnly?>("StartDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("University")
                         .IsRequired()

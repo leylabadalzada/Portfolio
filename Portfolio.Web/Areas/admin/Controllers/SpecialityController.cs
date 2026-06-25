@@ -47,7 +47,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
 
         public async Task<IActionResult> Edit(Guid id)
         {
-            var vm = new SpecialityUpdateVM() { Name = await _service.GetSpecialityAsync(id) };
+            var vm = new SpecialityUpdateVM() { Name = await _service.GetAsync(id) };
             return View(vm);
 
         }

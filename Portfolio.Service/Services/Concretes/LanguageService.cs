@@ -18,7 +18,7 @@ namespace Portfolio.Service.Services.Concretes
 
         public async Task<List<LanguageGetVM>> GetAllAsync()
         {
-            return await _context.Languages.AsNoTracking().Select(language => language.ToLanguageGetVM()).ToListAsync();
+            return await _context.Languages.AsNoTracking().OrderByDescending(e => e.CreatedAt).Select(language => language.ToLanguageGetVM()).ToListAsync();
         }
 
         public async Task<bool> CreateAsync(LanguageCreateOrUpdateVM vm)

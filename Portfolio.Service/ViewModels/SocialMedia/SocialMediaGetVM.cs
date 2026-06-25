@@ -2,7 +2,7 @@
 
 namespace Portfolio.Service.ViewModels.SocialMedia
 {
-    public class SocialMediaGetVM
+    public record SocialMediaGetVM
     {
         public string Id { get; set; }
         public SocialMediaName SocialMediaName { get; set; }

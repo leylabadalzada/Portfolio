@@ -1,5 +1,6 @@
 ﻿using Portfolio.Core.Models;
 using Portfolio.Service.ViewModels.Author;
+using Portfolio.Service.ViewModels.Education;
 using Portfolio.Service.ViewModels.Language;
 using Portfolio.Service.ViewModels.Resumes;
 using Portfolio.Service.ViewModels.SocialMedia;
@@ -73,6 +74,22 @@ namespace Portfolio.Service.Extensions
                 Level = language.Level,
                 Name = language.Name,
                 UpdatedAt = language.UpdatedAt
+            };
+        }
+
+        public static EducationGetVM ToEducationGetVM(this Education education)
+        {
+            return new EducationGetVM
+            {
+                Id = education.ID.ToString(),
+                Description = education.Description,
+                EndDate = education.EndDate,
+                isContinuing = education.isContinuing,
+                Speciality = education.Speciality,
+                StartDate = education.StartDate,
+                University = education.University,
+                UpdatedAt = education.UpdatedAt,
+                CreatedAt = education.CreatedAt
             };
         }
     }

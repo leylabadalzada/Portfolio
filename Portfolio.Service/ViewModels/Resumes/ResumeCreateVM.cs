@@ -2,7 +2,7 @@
 
 namespace Portfolio.Service.ViewModels.Resumes
 {
-    public class ResumeCreateVM
+    public record ResumeCreateVM
     {
         public IFormFile File { get; set; }
     }

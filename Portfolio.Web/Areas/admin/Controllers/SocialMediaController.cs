@@ -42,7 +42,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
 
         public async Task<IActionResult> Update(Guid id)
         {
-            var media = await _service.GetByIdAsync(id);
+            var media = await _service.GetAsync(id);
             var vm = new SocialMediaCreateOrUpdateVM()
             {
                 SocialMediaName = media.SocialMediaName,

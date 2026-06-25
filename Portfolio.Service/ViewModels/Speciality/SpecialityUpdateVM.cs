@@ -1,6 +1,6 @@
 ﻿namespace Portfolio.Service.ViewModels.Speciality
 {
-    public class SpecialityUpdateVM
+    public record SpecialityUpdateVM
     {
         public string Name { get; set; }
     }

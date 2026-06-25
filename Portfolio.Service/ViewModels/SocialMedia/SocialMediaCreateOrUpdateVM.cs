@@ -2,7 +2,7 @@
 
 namespace Portfolio.Service.ViewModels.SocialMedia
 {
-    public class SocialMediaCreateOrUpdateVM
+    public record SocialMediaCreateOrUpdateVM
     {
         public SocialMediaName SocialMediaName { get; set; }
         public string UserName { get; set; }

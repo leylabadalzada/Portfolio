@@ -1,0 +1,50 @@
+﻿@model List<EducationGetVM>
+
+<div class="container">
+    <h2>Education</h2>
+    <a class="btn btn-success" asp-action="create">Create</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">University</th>
+                <th scope="col">Speciality</th>
+                <th scope="col">Description</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End date</th>
+                <th scope="col">CreatedAt</th>
+                <th scope="col">UpdatedAt</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var education in Model)
+            {
+                <tr>
+                    <th scope="row">@education.Id</th>
+                    <td>@education.University</td>
+                    <td>@education.Speciality</td>
+                    <td>@education.Description</td>
+                    <td>@education.StartDate?.ToString("dd MMM yyyy")</td>
+                    <td>@education.EndDate?.ToString("dd MMM yyyy")</td>
+                    <td>@education.CreatedAt</td>
+                    <td>@education.UpdatedAt</td>
+                    <td class="text-center">
+                        <div class="d-flex gap-3 align-items-center">
+                            <a asp-action="update" asp-route-id="@education.Id"  class="btn p-0 border-0 bg-transparent">
+                                <i class="fa-solid fa-edit text-warning fs-4"></i>
+                            </a>
+
+                            <form asp-action="remove" method="post" asp-route-id="@education.Id" class="m-0">
+                                <button type="submit" class="btn p-0 border-0 bg-transparent">
+                                    <i class="fa-solid fa-trash text-danger fs-4"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-ordinary" asp-area="admin" asp-controller="dashboard" asp-action="index">Go Dashboard</a>
+</div>

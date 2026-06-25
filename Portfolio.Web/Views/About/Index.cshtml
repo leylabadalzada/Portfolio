@@ -79,50 +79,22 @@
                             <div class="timeline-box padd-15">
                                 <div class="timeline shadow-dark">
                                     <!--timeline item-->
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2024
-                                        </h3>
-                                        <h4 class="timeline-title">
-                                            "C# based Full-Stack Developing"
-                                        </h4>
-                                        <p>Jet Academy programming courses.</p>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2021-2023
-                                        </h3>
-                                        <h4 class="timeline-title">
-                                            "Information Technology and Systems Engineering"
-                                        </h4>
-                                        <p>
-                                            Master degree in Azerbaijan State Oil and Industry
-                                            University (with honors).
-                                        </p>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2017-2021
-                                        </h3>
-                                        <h4 class="timeline-title">"Computer Science"</h4>
-                                        <p>
-                                            Bachelor education in Azerbaijan State Oil and
-                                            Industry University.
-                                        </p>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="circle-dot"></div>
-                                        <h3 class="timeline-date">
-                                            <i class="fa fa-calendar"></i>2013-2017
-                                        </h3>
-                                        <h4 class="timeline-title">
-                                            "Mathematics-oriented education "
-                                        </h4>
-                                        <p>Ilyas Afendiyev Elitar Gymnasium.</p>
-                                    </div>
+                                    @foreach(var education in Model.Education)
+                                    {
+                                        <div class="timeline-item">
+                                            <div class="circle-dot"></div>
+                                            <h3 class="timeline-date">
+                                                <i class="fa fa-calendar"></i>@education.StartDate?.ToString("dd MMM yyyy") - @education.EndDate?.ToString("dd MMM yyyy")
+                                            </h3>
+                                            <h4 class="timeline-title">
+                                                "@education.Speciality"
+                                            </h4>
+                                            <h5 class="fw-bold">
+                                                @education.University
+                                            </h5>
+                                            <p>@education.Description</p>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
