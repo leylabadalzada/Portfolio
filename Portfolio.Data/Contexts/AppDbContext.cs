@@ -15,6 +15,8 @@ namespace Portfolio.Data.Contexts
         public DbSet<Language> Languages { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<Experience> Experiences { get; set; }
+        public DbSet<Field> Fields { get; set; }
+        public DbSet<Skill> Skills { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }

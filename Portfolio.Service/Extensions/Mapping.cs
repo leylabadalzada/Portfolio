@@ -2,6 +2,7 @@
 using Portfolio.Service.ViewModels.Author;
 using Portfolio.Service.ViewModels.Education;
 using Portfolio.Service.ViewModels.Experience;
+using Portfolio.Service.ViewModels.Field;
 using Portfolio.Service.ViewModels.Language;
 using Portfolio.Service.ViewModels.Resumes;
 using Portfolio.Service.ViewModels.SocialMedia;
@@ -91,6 +92,17 @@ namespace Portfolio.Service.Extensions
                 University = education.University,
                 UpdatedAt = education.UpdatedAt,
                 CreatedAt = education.CreatedAt
+            };
+        }
+
+        public static FieldGetVM ToFieldGetVM(this Field field)
+        {
+            return new FieldGetVM
+            {
+                Id = field.ID.ToString(),
+                CreatedAt = field.CreatedAt,
+                UpdatedAt = field.UpdatedAt,
+                FieldName = field.FieldName
             };
         }
 

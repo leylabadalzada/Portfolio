@@ -51,7 +51,7 @@ namespace Portfolio.Service.Services.Concretes
 
         public async Task<bool> RemoveAsync(Guid id)
         {
-            var education = await _context.Educations.FindAsync(id);
+            var education = await _context.Experiences.FindAsync(id);
             if (education == null) return false;
             var result = _context.Remove(education);
             if (result.State != EntityState.Deleted) return false;
