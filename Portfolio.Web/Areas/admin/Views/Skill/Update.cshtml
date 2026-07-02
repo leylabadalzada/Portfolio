@@ -1,0 +1,19 @@
+﻿@model SkillUpdateVM
+
+<div class="container">
+    <h3>Update Skill</h3>
+    <form asp-controller="skill" asp-action="update" method="post">
+        <div class="form-group">
+            <label asp-for="Name">Skill</label>
+            <select asp-for="Name" asp-items="ViewBag.Skills" class="form-control">
+                <option value="">Choose</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Name</label>
+            <input asp-for="Description" class="form-control" aria-describedby="emailHelp">
+        </div>
+        <a class="btn btn-ordinary" asp-action="index">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>

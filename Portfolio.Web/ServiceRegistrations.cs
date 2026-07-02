@@ -15,6 +15,7 @@ namespace Portfolio.Web
             services.AddScoped<IEducationService, EducationService>();
             services.AddScoped<IExperienceService, ExperienceService>();
             services.AddScoped<IFieldService, FieldService>();
+            services.AddScoped<ISkillService, SkillService>();
 
             return services;
         }

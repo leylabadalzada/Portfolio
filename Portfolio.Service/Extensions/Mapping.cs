@@ -5,6 +5,7 @@ using Portfolio.Service.ViewModels.Experience;
 using Portfolio.Service.ViewModels.Field;
 using Portfolio.Service.ViewModels.Language;
 using Portfolio.Service.ViewModels.Resumes;
+using Portfolio.Service.ViewModels.Skill;
 using Portfolio.Service.ViewModels.SocialMedia;
 using Portfolio.Service.ViewModels.Speciality;
 
@@ -119,6 +120,20 @@ namespace Portfolio.Service.Extensions
                 Company = experience.Company,
                 UpdatedAt = experience.UpdatedAt,
                 CreatedAt = experience.CreatedAt
+            };
+        }
+
+        public static SkillGetVM ToSkillGetVM(this Skill skill)
+        {
+            return new SkillGetVM
+            {
+                Id = skill.ID.ToString(),
+                CreatedAt = skill.CreatedAt,
+                FieldId = skill.FieldId.ToString(),
+                Description = skill.Description,
+                Name = skill.Name,
+                UpdatedAt = skill.UpdatedAt,
+                FieldName = skill.Field.FieldName
             };
         }
     }
