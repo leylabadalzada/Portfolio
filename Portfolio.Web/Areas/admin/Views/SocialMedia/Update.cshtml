@@ -1,24 +1,29 @@
 ﻿@model SocialMediaCreateOrUpdateVM
 
-<h3>Update Social Media</h3>
-<div class="container">
+<div class="container my-5">
+    <h3 class="mb-4 text-dark">Update Social Media</h3>
 
     <form asp-controller="socialmedia" asp-action="update" method="post">
-        <div class="form-group">
-            <label asp-for="SocialMediaName">Social Media</label>
+        <div class="form-group mb-3">
+            <label asp-for="SocialMediaName" class="form-label mb-2">Social Media</label>
             <select asp-for="SocialMediaName" asp-items="ViewBag.Names" class="form-control">
                 <option value="">Choose</option>
             </select>
         </div>
-        <div class="form-group">
-            <label asp-for="UserName">Username on Social Media</label>
+
+        <div class="form-group mb-3">
+            <label asp-for="UserName" class="form-label mb-2">Username on Social Media</label>
             <input asp-for="UserName" class="form-control" aria-describedby="emailHelp">
         </div>
-        <div class="form-group">
-            <label asp-for="Url">URL</label>
+
+        <div class="form-group mb-4">
+            <label asp-for="Url" class="form-label mb-2">URL</label>
             <input asp-for="Url" class="form-control" aria-describedby="emailHelp">
         </div>
-        <a class="btn" asp-action="index">Cancel</a>
-        <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Update</button>
+
+        <div class="d-flex gap-2">
+            <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-action="index">Cancel</a>
+            <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Update</button>
+        </div>
     </form>
 </div>

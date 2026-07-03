@@ -1,13 +1,19 @@
 ﻿@model ResumeCreateVM
-<h3>Upload Resume</h3>
-<div class="container">
+
+<div class="container my-5">
+    <h3 class="mb-4 text-dark">Upload Resume</h3>
+
     <form asp-controller="resume" asp-action="create" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label asp-for="File">Resume</label>
+
+        <div class="form-group mb-4">
+            <label asp-for="File" class="form-label mb-2">Resume</label>
             <input asp-for="File" type="file" class="form-control" aria-describedby="emailHelp">
-            @* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> *@
         </div>
-        <a class="btn" asp-action="index">Cancel</a>
-        <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Upload</button>
+
+        <div class="d-flex gap-2">
+            <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-action="index">Cancel</a>
+            <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Upload</button>
+        </div>
+
     </form>
 </div>

@@ -1,46 +1,57 @@
 ﻿@model List<ResumeGetVM>
 
-<div class="container">
-    <h2>Resumes</h2>
-    <a class="btn btn-success" asp-action="create">Create</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">File</th>
-                <th scope="col">Selected</th>
-                <th scope="col">CreatedAt</th>
-                <th scope="col">UpdatedAt</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var resume in Model)
-            {
-                <tr>
-                    <th scope="row">@resume.Id</th>
-                    <td>@resume.Filename</td>
-                    <td>@resume.IsSelected</td>
-                    <td>@resume.CreatedAt</td>
-                    <td>@resume.UpdatedAt</td>
-                    <td class="text-center">
-                        <div class="d-flex gap-3 align-items-center">
-                            <form asp-action="selectresume" method="post" asp-route-id="@resume.Id" class="m-0">
-                                <button type="submit" class="btn p-0 border-0 bg-transparent">
-                                    <i class="fa-solid fa-circle-check text-success fs-4"></i>
-                                </button>
-                            </form>
+<div class="container my-5">
 
-                            <form asp-action="remove" method="post" asp-route-id="@resume.Id" class="m-0">
-                                <button type="submit" class="btn p-0 border-0 bg-transparent">
-                                    <i class="fa-solid fa-trash text-danger fs-4"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-dark m-0">Resumes</h2>
+        <a class="btn" style="background-color: #0d233a; color: white;" asp-action="create">
+            <i class="fa-solid fa-plus me-1"></i> Create
+        </a>
+    </div>
+
+    <div class="table-responsive mb-4">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">File</th>
+                    <th scope="col">Selected</th>
+                    <th scope="col">CreatedAt</th>
+                    <th scope="col">UpdatedAt</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <a class="btn btn-ordinary" asp-area="admin" asp-controller="dashboard" asp-action="index">Go Dashboard</a>
+            </thead>
+            <tbody>
+                @foreach (var resume in Model)
+                {
+                    <tr>
+                        <th scope="row">@resume.Id</th>
+                        <td>@resume.Filename</td>
+                        <td>@resume.IsSelected</td>
+                        <td>@resume.CreatedAt</td>
+                        <td>@resume.UpdatedAt</td>
+                        <td>
+                            <div class="d-flex gap-3 justify-content-center align-items-center">
+                                <form asp-action="selectresume" method="post" asp-route-id="@resume.Id" class="m-0">
+                                    <button type="submit" class="btn p-0 border-0 bg-transparent fs-5">
+                                        <i class="fa-solid fa-circle-check text-success"></i>
+                                    </button>
+                                </form>
+
+                                <form asp-action="remove" method="post" asp-route-id="@resume.Id" class="m-0">
+                                    <button type="submit" class="btn p-0 border-0 bg-transparent fs-5">
+                                        <i class="fa-solid fa-trash text-danger"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-area="admin" asp-controller="dashboard" asp-action="index">
+        <i class="fa-solid fa-arrow-left me-1"></i> Go Dashboard
+    </a>
 </div>

@@ -1,42 +1,53 @@
 ﻿@model ResponseVM<List<FieldGetVM>>
 
-<div class="container">
-    <h2>Fields</h2>
-    <a class="btn btn-success" asp-action="create">Create</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Field</th>
-                <th scope="col">CreatedAt</th>
-                <th scope="col">UpdatedAt</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var field in Model.Data)
-            {
-                <tr>
-                    <th scope="row">@field.Id</th>
-                    <td>@field.FieldName</td>
-                    <td>@field.CreatedAt</td>
-                    <td>@field.UpdatedAt</td>
-                    <td class="text-center">
-                        <div class="d-flex gap-3 align-items-center">
-                            <a class="btn p-0 border-0 bg-transparent" asp-action="update" asp-route-id="@field.Id">
-                                <i class="fa-solid fa-edit text-warning fs-4"></i>
-                            </a>
+<div class="container my-5">
 
-                            <form asp-action="remove" method="post" asp-route-id="@field.Id" class="m-0">
-                                <button type="submit" class="btn p-0 border-0 bg-transparent">
-                                    <i class="fa-solid fa-trash text-danger fs-4"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-dark m-0">Fields</h2>
+        <a class="btn" style="background-color: #0d233a; color: white;" asp-action="create">
+            <i class="fa-solid fa-plus me-1"></i> Create
+        </a>
+    </div>
+
+    <div class="table-responsive mb-4">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Field</th>
+                    <th scope="col">CreatedAt</th>
+                    <th scope="col">UpdatedAt</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <a class="btn btn-ordinary" asp-area="admin" asp-controller="dashboard" asp-action="index">Go Dashboard</a>
+            </thead>
+            <tbody>
+                @foreach (var field in Model.Data)
+                {
+                    <tr>
+                        <th scope="row">@field.Id</th>
+                        <td>@field.FieldName</td>
+                        <td>@field.CreatedAt</td>
+                        <td>@field.UpdatedAt</td>
+                        <td>
+                            <div class="d-flex gap-3 justify-content-center align-items-center">
+                                <a class="btn p-0 border-0 bg-transparent fs-5" asp-action="update" asp-route-id="@field.Id">
+                                    <i class="fa-solid fa-edit text-warning"></i>
+                                </a>
+
+                                <form asp-action="remove" method="post" asp-route-id="@field.Id" class="m-0">
+                                    <button type="submit" class="btn p-0 border-0 bg-transparent fs-5">
+                                        <i class="fa-solid fa-trash text-danger"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-area="admin" asp-controller="dashboard" asp-action="index">
+        <i class="fa-solid fa-arrow-left me-1"></i> Go Dashboard
+    </a>
 </div>

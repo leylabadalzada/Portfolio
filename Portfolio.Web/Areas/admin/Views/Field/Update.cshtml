@@ -1,12 +1,17 @@
 ﻿@model FieldCreateOrUpdateVM
-<h3>Update Field</h3>
-<div class="container">
+
+<div class="container my-5">
+    <h3 class="mb-4 text-dark">Update Field</h3>
+
     <form asp-controller="field" asp-action="update" method="post">
-        <div class="form-group">
-            <label asp-for="FieldName">Field</label>
+        <div class="form-group mb-4">
+            <label asp-for="FieldName" class="form-label mb-2">Field</label>
             <input asp-for="FieldName" class="form-control">
         </div>
-        <a class="btn" asp-action="index">Cancel</a>
-        <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Update</button>
+
+        <div class="d-flex gap-2">
+            <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-action="index">Cancel</a>
+            <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Update</button>
+        </div>
     </form>
 </div>

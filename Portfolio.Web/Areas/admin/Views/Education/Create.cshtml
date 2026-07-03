@@ -1,61 +1,55 @@
 ﻿@model EducationCreateOrUpdateVM
 
-<div class="container">
-    <h3>Create Education</h3>
+<div class="container my-5">
+    <h3 class="mb-4 text-dark">Create Education</h3>
 
     <form asp-controller="Education" asp-action="Create" method="post">
 
         <div class="form-group mb-3">
-            <label asp-for="University">University</label>
+            <label asp-for="University" class="form-label mb-2">University</label>
             <input asp-for="University" class="form-control" />
             <span asp-validation-for="University" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
-            <label asp-for="Speciality">Speciality</label>
+            <label asp-for="Speciality" class="form-label mb-2">Speciality</label>
             <input asp-for="Speciality" class="form-control" />
             <span asp-validation-for="Speciality" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
-            <label asp-for="Description">Description</label>
+            <label asp-for="Description" class="form-label mb-2">Description</label>
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
-            <label>Start Date</label>
-
-            <input asp-for="StartDate.Day" class="form-control mb-2" placeholder="Day" />
-            <input asp-for="StartDate.Month" class="form-control mb-2" placeholder="Month" />
-            <input asp-for="StartDate.Year" class="form-control" placeholder="Year" />
+            <label class="form-label mb-2">Start Date</label>
+            <div class="row g-2">
+                <div class="col"><input asp-for="StartDate.Day" class="form-control" placeholder="Day" /></div>
+                <div class="col"><input asp-for="StartDate.Month" class="form-control" placeholder="Month" /></div>
+                <div class="col"><input asp-for="StartDate.Year" class="form-control" placeholder="Year" /></div>
+            </div>
         </div>
 
         <div class="form-check mb-3">
-            <input asp-for="isContinuing" class="form-check-input" />
-            <label asp-for="isContinuing" class="form-check-label">
-                Present
-            </label>
+            <input asp-for="isContinuing" class="form-check-input" id="isContinuing" />
+            <label asp-for="isContinuing" class="form-check-label">Present</label>
         </div>
 
-        <div class="form-group mb-3">
-            <label>End Date</label>
-
-            <input asp-for="EndDate.Day"
-                   class="form-control end-date-input mb-2"
-                   placeholder="Day" />
-
-            <input asp-for="EndDate.Month"
-                   class="form-control end-date-input mb-2"
-                   placeholder="Month" />
-
-            <input asp-for="EndDate.Year"
-                   class="form-control end-date-input"
-                   placeholder="Year" />
+        <div class="form-group mb-4">
+            <label class="form-label mb-2">End Date</label>
+            <div class="row g-2">
+                <div class="col"><input asp-for="EndDate.Day" class="form-control end-date-input" placeholder="Day" /></div>
+                <div class="col"><input asp-for="EndDate.Month" class="form-control end-date-input" placeholder="Month" /></div>
+                <div class="col"><input asp-for="EndDate.Year" class="form-control end-date-input" placeholder="Year" /></div>
+            </div>
         </div>
 
-        <a asp-action="Index" class="btn">Cancel</a>
-        <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Create</button>
+        <div class="d-flex gap-2">
+            <a asp-action="Index" class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;">Cancel</a>
+            <button type="submit" class="btn" style="background-color: #0d233a; color: white;">Create</button>
+        </div>
     </form>
 </div>
 
@@ -64,15 +58,15 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-
             const checkbox = document.getElementById("isContinuing");
             const endDateInputs = document.querySelectorAll(".end-date-input");
 
-            function toggleEndDate() {
+            // Element ID-si ilə JS-in düzgün eşləşməsi üçün id məcburi əlavə edildi
+            checkbox.setAttribute("id", "isContinuing");
 
+            function toggleEndDate() {
                 endDateInputs.forEach(input => {
                     input.disabled = checkbox.checked;
-
                     if (checkbox.checked) {
                         input.value = "";
                     }
@@ -80,7 +74,6 @@
             }
 
             toggleEndDate();
-
             checkbox.addEventListener("change", toggleEndDate);
         });
     </script>
