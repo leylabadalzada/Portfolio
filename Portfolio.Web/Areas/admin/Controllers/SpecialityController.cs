@@ -45,7 +45,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
             return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
         }
 
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Update(Guid id)
         {
             var vm = new SpecialityUpdateVM() { Name = await _service.GetAsync(id) };
             return View(vm);
@@ -53,7 +53,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, SpecialityUpdateVM vm)
+        public async Task<IActionResult> Update(Guid id, SpecialityUpdateVM vm)
         {
             var result = await _service.UpdateAsync(id, vm);
             return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");

@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -10,10 +9,82 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
+
+    <style>
+            /* Sol menyunu sabit və ekran boyu etmək üçün kiçik toxunuş */
+            .admin-sidebar {
+                width: 260px;
+                min-height: 100vh;
+            }
+
+            .sidebar-link {
+                transition: all 0.2s ease;
+            }
+
+                .sidebar-link:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+    </style>
 </head>
-<body>
-    <div>
-        @RenderBody()
+<body class="bg-light">
+
+    <!-- Əsas Wrapper (Sol Menyu + Sağ Məzmun yan-yana) -->
+    <div class="d-flex">
+
+        <!-- ASIDE (SOL MENYU) -->
+        <aside class="admin-sidebar bg-dark text-white d-flex flex-column sticky-top h-100">
+            <!-- Başlıq hissəsi -->
+            <div class="p-4 border-bottom border-secondary text-center fw-bold fs-5">
+                <i class="fa-solid fa-user-gear me-2 text-primary"></i>Admin Panel
+            </div>
+
+            <!-- Linklər -->
+            <nav class="nav flex-column p-3 gap-1 flex-grow-1">
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="author" asp-action="index">
+                    <i class="fa-solid fa-user-pen text-primary" style="width: 20px;"></i> Authors
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="resume" asp-action="index">
+                    <i class="fa-solid fa-file-invoice text-primary" style="width: 20px;"></i> Resumes
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="speciality" asp-action="index">
+                    <i class="fa-solid fa-graduation-cap text-primary" style="width: 20px;"></i> Specialities
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="socialmedia" asp-action="index">
+                    <i class="fa-solid fa-share-nodes text-primary" style="width: 20px;"></i> Social Medias
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="language" asp-action="index">
+                    <i class="fa-solid fa-language text-primary" style="width: 20px;"></i> Languages
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="education" asp-action="index">
+                    <i class="fa-solid fa-university text-primary" style="width: 20px;"></i> Education
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="experience" asp-action="index">
+                    <i class="fa-solid fa-briefcase text-primary" style="width: 20px;"></i> Experiences
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="field" asp-action="index">
+                    <i class="fa-solid fa-layer-group text-primary" style="width: 20px;"></i> Fields
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="skill" asp-action="index">
+                    <i class="fa-solid fa-lightbulb text-primary" style="width: 20px;"></i> Skills
+                </a>
+                <a class="nav-link text-white sidebar-link p-2 rounded d-flex align-items-center gap-3" asp-area="admin" asp-controller="project" asp-action="index">
+                    <i class="fa-solid fa-code text-primary" style="width: 20px;"></i> Projects
+                </a>
+            </nav>
+
+            <!-- Alt Çıxış Hissəsi -->
+            <div class="p-3 border-top border-secondary">
+                <a href="/" class="btn btn-outline-danger w-100 btn-sm">
+                    <i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Çıxış
+                </a>
+            </div>
+        </aside>
+
+        <!-- SAĞ TƏRƏF (MƏZMUN SAHƏSİ) -->
+        <main class="flex-grow-1 p-4" style="min-width: 0;">
+            @RenderBody()
+        </main>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

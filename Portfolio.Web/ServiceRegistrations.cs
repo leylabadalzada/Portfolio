@@ -17,6 +17,7 @@ namespace Portfolio.Web
             services.AddScoped<IFieldService, FieldService>();
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             return services;
         }
