@@ -17,6 +17,7 @@ namespace Portfolio.Data.Contexts
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Field> Fields { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Project> Projects { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }

@@ -1,0 +1,60 @@
+﻿@model ResponseVM<List<ProjectGetVM>>
+
+<div class="container">
+    <h2>Fields</h2>
+    <a class="btn btn-success" asp-action="create">Create</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Project</th>
+                <th scope="col">GitHub</th>
+                <th scope="col">Live Preview</th>
+                <th scope="col">Short Description</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Featured</th>
+                <th scope="col">CreatedAt</th>
+                <th scope="col">UpdatedAt</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.Data)
+            {
+                <tr>
+                    <th scope="row">@project.Id</th>
+                    <td>@project.ProjectName</td>
+                    <td>@project.GitHubURL</td>
+                    <td>@project.LiveURL</td>
+                    <td>@project.ShortDescription</td>
+                    <td>@project.Description</td>
+                    <td>
+                        <img alt="Image"
+                             class="rounded-circle border"
+                             width="50"
+                             height="50"
+                             style="object-fit: cover;" src="~/assets/images/projects/@project.Image" />
+                    </td>
+                    <td>@project.IsFeatured</td>
+                    <td>@project.CreatedAt</td>
+                    <td>@project.UpdatedAt</td>
+                    <td class="text-center">
+                        <div class="d-flex gap-3 align-items-center">
+                            <a class="btn p-0 border-0 bg-transparent" asp-action="update" asp-route-id="@project.Id">
+                                <i class="fa-solid fa-edit text-warning fs-4"></i>
+                            </a>
+
+                            <form asp-action="remove" method="post" asp-route-id="@project.Id" class="m-0">
+                                <button type="submit" class="btn p-0 border-0 bg-transparent">
+                                    <i class="fa-solid fa-trash text-danger fs-4"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-ordinary" asp-area="admin" asp-controller="dashboard" asp-action="index">Go Dashboard</a>
+</div>

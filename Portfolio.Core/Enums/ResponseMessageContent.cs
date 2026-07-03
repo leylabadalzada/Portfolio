@@ -5,7 +5,6 @@
         Add,
         Remove,
         Update,
-        Save,
-        Authentication
+        Save
     }
 }

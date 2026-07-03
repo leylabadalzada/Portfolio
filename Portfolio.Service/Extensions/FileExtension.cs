@@ -12,5 +12,10 @@ namespace Portfolio.Service.Extensions
             file.CopyTo(stream);
             return filename;
         }
+
+        public static void DeleteFile(this string path)
+        {
+            if (File.Exists(path)) File.Delete(path);
+        }
     }
 }

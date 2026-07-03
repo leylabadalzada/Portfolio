@@ -4,6 +4,7 @@ using Portfolio.Service.ViewModels.Education;
 using Portfolio.Service.ViewModels.Experience;
 using Portfolio.Service.ViewModels.Field;
 using Portfolio.Service.ViewModels.Language;
+using Portfolio.Service.ViewModels.Project;
 using Portfolio.Service.ViewModels.Resumes;
 using Portfolio.Service.ViewModels.Skill;
 using Portfolio.Service.ViewModels.SocialMedia;
@@ -134,6 +135,23 @@ namespace Portfolio.Service.Extensions
                 Name = skill.Name,
                 UpdatedAt = skill.UpdatedAt,
                 FieldName = skill.Field.FieldName
+            };
+        }
+
+        public static ProjectGetVM ToProjectGetVM(this Project project)
+        {
+            return new ProjectGetVM
+            {
+                Id = project.ID.ToString(),
+                CreatedAt = project.CreatedAt,
+                Description = project.Description,
+                GitHubURL = project.GitHubURL,
+                Image = project.Image,
+                IsFeatured = project.IsFeatured,
+                LiveURL = project.LiveURL,
+                ProjectName = project.ProjectName,
+                ShortDescription = project.ShortDescription,
+                UpdatedAt = project.UpdatedAt
             };
         }
     }
