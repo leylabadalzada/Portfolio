@@ -20,7 +20,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
             return View(await _service.GetAsync());
         }
 
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Update()
         {
             var author = await _service.GetAsync();
             var vm = new AuthorUpdateVM()
@@ -43,7 +43,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(AuthorUpdateVM vm)
+        public async Task<IActionResult> Update(AuthorUpdateVM vm)
         {
             if (!ModelState.IsValid) return View(vm);
 

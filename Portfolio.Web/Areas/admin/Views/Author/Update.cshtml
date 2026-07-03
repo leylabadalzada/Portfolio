@@ -1,0 +1,61 @@
+﻿@model AuthorUpdateVM
+
+<div class="container my-5">
+    <h3 class="mb-4 text-dark">Update Author Information</h3>
+
+    <form asp-controller="author" asp-action="update" method="post" enctype="multipart/form-data">
+
+        <div class="form-group mb-3">
+            <label asp-for="FirstName" class="form-label mb-2">FirstName</label>
+            <input asp-for="FirstName" class="form-control" placeholder="E.G John">
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="LastName" class="form-label mb-2">LastName</label>
+            <input asp-for="LastName" class="form-control" placeholder="E.G Doe">
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Email" class="form-label mb-2">Email</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="E.G sample@example.com">
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Description" class="form-label mb-2">Description</label>
+            <input asp-for="Description" class="form-control" placeholder="About page">
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Info" class="form-label mb-2">Info</label>
+            <input asp-for="Info" class="form-control" placeholder="Home page">
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Location" class="form-label mb-2">Location</label>
+            <input asp-for="Location" class="form-control" placeholder="Country and City">
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="form-label mb-2">Birth Date</label>
+            <div class="row g-2">
+                <div class="col"><input asp-for="BirthDate.Day" class="form-control" placeholder="Day"></div>
+                <div class="col"><input asp-for="BirthDate.Month" class="form-control" placeholder="Month"></div>
+                <div class="col"><input asp-for="BirthDate.Year" class="form-control" placeholder="Year"></div>
+            </div>
+        </div>
+
+        <div class="form-group mb-4">
+            <label asp-for="isFreelanceAvailable" class="form-label mb-2">Is Freelance Available?</label>
+            <select asp-for="isFreelanceAvailable" class="form-select">
+                <option value="">Not Chosen</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-action="index">Cancel</a>
+            <button type="submit" style="background-color: #0d233a; color: white;" class="btn">Update</button>
+        </div>
+    </form>
+</div>
