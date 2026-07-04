@@ -1,4 +1,5 @@
-﻿using Portfolio.Service.Services.Abstractions;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Portfolio.Service.Services.Abstractions;
 using Portfolio.Service.Services.Concretes;
 
 namespace Portfolio.Web
@@ -18,6 +19,9 @@ namespace Portfolio.Web
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IOtpService, OtpService>();
+            services.AddSingleton<IMemoryCache, MemoryCache>();
 
             return services;
         }

@@ -6,8 +6,9 @@ namespace Portfolio.Service.Services.Abstractions
     public interface IAuthorService
     {
         Task<ResponseVM> ChangeImageAsync(ChangeImageVM vm);
-        Task<ResponseVM<List<AuthorGetVM>>> GetAllAsync();
         Task<ResponseVM<AuthorGetVM>> GetAsync();
         Task<ResponseVM> UpdateAsync(AuthorUpdateVM vm);
+        Task<ResponseVM> ChangeEmailAsync(string email);
+        Task<ResponseVM> VerifyEmailAsync(string email, int otp);
     }
 }

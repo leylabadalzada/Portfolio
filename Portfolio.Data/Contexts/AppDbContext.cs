@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Portfolio.Core.Constants;
 using Portfolio.Core.Models;
 using Portfolio.Core.Models.BaseModels;
@@ -6,7 +7,7 @@ using Portfolio.Data.Seeders;
 
 namespace Portfolio.Data.Contexts
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public DbSet<Author> Authors { get; set; }
         public DbSet<Resume> Resumes { get; set; }
@@ -18,6 +19,7 @@ namespace Portfolio.Data.Contexts
         public DbSet<Field> Fields { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -25,6 +27,7 @@ namespace Portfolio.Data.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedAuthor();
+            modelBuilder.SeedSpeciality();
             base.OnModelCreating(modelBuilder);
         }
 

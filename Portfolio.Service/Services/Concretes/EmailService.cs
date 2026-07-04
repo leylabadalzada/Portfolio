@@ -16,32 +16,53 @@ namespace Portfolio.Service.Services.Concretes
             _config = config;
         }
 
-        public async Task<ResponseVM> SendEmailAsync(string fromUserEmail, string subject, string body, bool isHTML = true)
+        public async Task<ResponseVM> SendEmailAsync(string emailAddress, string subject, string body, bool toAuthor = true)
         {
             var email = new MimeMessage();
 
-            // Göndərən yenə sizin öz emailiniz olur (Serverin xəta verməməsi üçün)
-            var myEmail = _config["EmailSettings:Receiver"];
-            email.From.Add(MailboxAddress.Parse(myEmail));
-            email.To.Add(MailboxAddress.Parse(myEmail));
+            var systemEmail = _config["EmailSettings:Receiver"];
 
-            // ƏSAS HİSSƏ: İstifadəçi "Reply" edəndə mesajın gedəcəyi ünvan
-            email.ReplyTo.Add(MailboxAddress.Parse(fromUserEmail));
+            if (toAuthor)
+            {
+                // İstifadəçi -> Sayt sahibi
+                email.From.Add(MailboxAddress.Parse(emailAddress));
+                email.To.Add(MailboxAddress.Parse(systemEmail));
+
+                // SMTP auth üçün ReplyTo da əlavə etmək olar
+                email.ReplyTo.Add(MailboxAddress.Parse(emailAddress));
+            }
+            else
+            {
+                // Sayt -> İstifadəçi
+                email.From.Add(MailboxAddress.Parse(systemEmail));
+                email.To.Add(MailboxAddress.Parse(emailAddress));
+            }
 
             email.Subject = subject;
-
-            // Mesajın içinə istifadəçinin emailini də qeyd olaraq əlavə edirik ki, vizual olaraq da görəsiniz
-            string formattedBody = $"<b>Göndərən istifadəçi:</b> {fromUserEmail}<br><br><b>Mesaj:</b><br>{body}";
-
-            email.Body = new TextPart(TextFormat.Html) { Text = formattedBody };
+            email.Body = new TextPart(TextFormat.Html)
+            {
+                Text = body
+            };
 
             using var smtp = new SmtpClient();
-            await smtp.ConnectAsync(_config["EmailSettings:Server"], int.Parse(_config["EmailSettings:Port"]), MailKit.Security.SecureSocketOptions.StartTls);
-            await smtp.AuthenticateAsync(_config["EmailSettings:Receiver"], _config["EmailSettings:Password"]);
+
+            await smtp.ConnectAsync(
+                _config["EmailSettings:Server"],
+                int.Parse(_config["EmailSettings:Port"]),
+                MailKit.Security.SecureSocketOptions.StartTls);
+
+            await smtp.AuthenticateAsync(
+                systemEmail,
+                _config["EmailSettings:Password"]);
+
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
 
-            return new ResponseVM { Message = "Email is sent successfully", Result = true }; // Qeyd: Controller-də result.Result yoxlaması olduğu üçün bura true əlavə etdim.
+            return new ResponseVM
+            {
+                Result = true,
+                Message = "Email sent successfully"
+            };
         }
     }
 }

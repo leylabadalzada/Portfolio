@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Portfolio.Data.Contexts;
@@ -11,9 +12,11 @@ using Portfolio.Data.Contexts;
 namespace Portfolio.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260704202408_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +53,7 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "16cc1616-c932-4d2a-b678-0bf7a078cc58",
+                            Id = "34015e97-b5b7-424c-89fa-dde09d9c2cf1",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         });
@@ -218,8 +221,8 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "68eaa0bb-050e-4f2c-91bc-e73da839a3e7",
-                            RoleId = "16cc1616-c932-4d2a-b678-0bf7a078cc58"
+                            UserId = "066cde51-d208-4f7f-8c98-087a20948672",
+                            RoleId = "34015e97-b5b7-424c-89fa-dde09d9c2cf1"
                         });
                 });
 
@@ -539,15 +542,6 @@ namespace Portfolio.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Specialities");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = new Guid("c803ad47-b3dd-4f14-9d15-08b5d3211d4a"),
-                            CreatedAt = new DateTime(2026, 7, 4, 20, 30, 50, 697, DateTimeKind.Utc).AddTicks(2718),
-                            IsMain = true,
-                            Name = "Some speciality"
-                        });
                 });
 
             modelBuilder.Entity("Portfolio.Core.Models.Author", b =>
@@ -594,22 +588,22 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "68eaa0bb-050e-4f2c-91bc-e73da839a3e7",
+                            Id = "066cde51-d208-4f7f-8c98-087a20948672",
                             AccessFailedCount = 3,
-                            ConcurrencyStamp = "af44cc07-82d3-4f6a-9ded-c03e2b38e72e",
+                            ConcurrencyStamp = "90e37a90-0216-4db1-a777-7251e1b4a229",
                             Email = "email@sample.domain",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "EMAIL@SAMLE.DOMAIN",
                             NormalizedUserName = "AUTHOR123",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDMZyrzDzMsFFjNOPuTfV9w2l+9TgEpQt4s4NDadFxZIJ4+m4P/P7LdG8j5nc3oQgA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHfbLbP0v7P/Ur8ePBOjbwmwtoLhW1UQAOhZGwqZyZsdx9nVvAbwm+4dIuKipzALAQ==",
                             PhoneNumber = "+994123456789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "82094a2d-8ff1-46c6-9804-3ed8a9dc243e",
+                            SecurityStamp = "a13f14b1-43b5-465e-911c-9b9298fb4d5c",
                             TwoFactorEnabled = false,
                             UserName = "author123",
                             BirthDate = new DateOnly(1, 1, 1),
-                            CreatedAt = new DateTime(2026, 7, 5, 0, 30, 50, 647, DateTimeKind.Utc).AddTicks(7623),
+                            CreatedAt = new DateTime(2026, 7, 5, 0, 24, 7, 301, DateTimeKind.Utc).AddTicks(6258),
                             Description = "Sample Developer Description",
                             FirstName = "FirstName",
                             ImageName = "default.png",

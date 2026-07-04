@@ -29,9 +29,9 @@ namespace Portfolio.Web.Areas.admin.Controllers
                 FirstName = author.Data.FirstName,
                 LastName = author.Data.LastName,
                 Location = author.Data.Location,
-                Email = author.Data.Email,
                 Info = author.Data.Info,
                 isFreelanceAvailable = author.Data.isFreelanceAvailable,
+                PhoneNumber = author.Data.PhoneNumber,
                 BirthDate = new DateVM
                 {
                     Year = author.Data.BirthDate.Year,
@@ -70,6 +70,50 @@ namespace Portfolio.Web.Areas.admin.Controllers
             {
                 ModelState.AddModelError("internalError", result.Message!);
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ChangeEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeEmail(string email)
+        {
+            if (!ModelState.IsValid) return View(email);
+            var result = await _service.ChangeEmailAsync(email);
+
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+                return View(email);
+            }
+            TempData["NewEmail"] = email;
+            return RedirectToAction(nameof(VerifyEmail));
+        }
+
+        public IActionResult VerifyEmail()
+        {
+            return View(new VerifyEmailVM());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VerifyEmail(VerifyEmailVM vm)
+        {
+            var email = TempData["NewEmail"]?.ToString();
+
+            // TempData bir dəfə oxunandan sonra silinir
+            TempData.Keep("NewEmail");
+
+            var result = await _service.VerifyEmailAsync(email, vm.OtpCode);
+
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+                return View(vm);
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }

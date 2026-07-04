@@ -18,7 +18,7 @@ namespace Portfolio.Service.Extensions
         {
             return new AuthorGetVM
             {
-                Id = author.ID.ToString(),
+                Id = author.Id,
                 Location = author.Location,
                 BirthDate = author.BirthDate,
                 Description = author.Description,
@@ -27,7 +27,8 @@ namespace Portfolio.Service.Extensions
                 Email = author.Email,
                 Info = author.Info,
                 isFreelanceAvailable = author.isFreelanceAvailable,
-                ImageName = author.ImageName
+                ImageName = author.ImageName,
+                PhoneNumber = author.PhoneNumber
             };
         }
 

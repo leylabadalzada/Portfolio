@@ -11,6 +11,7 @@
         public string Location { get; set; }
         public string Info { get; set; } //homepage introduction
         public string Description { get; set; } //aboutpage 
+        public string PhoneNumber { get; set; }
         public bool isFreelanceAvailable { get; set; }
 
         public string FullName { get { return $"{FirstName} {LastName}"; } }

@@ -15,6 +15,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Location</th>
                     <th scope="col">Birthdate</th>
+                    <th scope="col">Phone</th>
                     <th scope="col">IsFreeAvailable</th>
                     <th scope="col">Image</th>
                 </tr>
@@ -29,6 +30,7 @@
                     <td>@Model.Data.Description</td>
                     <td>@Model.Data.Location</td>
                     <td>@Model.Data.BirthDate</td>
+                    <td>@Model.Data.PhoneNumber</td>
                     <td>@(Model.Data.isFreelanceAvailable == true ? "Yes" : "No")</td>
                     <td>
                         <img src="~/assets/images/authors/@Model.Data.ImageName"
@@ -49,6 +51,9 @@
         </a>
         <a class="btn" style="background-color: #0d233a; color: white;" asp-area="admin" asp-controller="author" asp-action="changeimage">
             <i class="fa-solid fa-image me-1"></i> Change Image
+        </a>
+        <a class="btn" style="background-color: #0d233a; color: white;" asp-area="admin" asp-controller="author" asp-action="changeemail">
+            <i class="fa-solid fa-image me-1"></i> Change Email
         </a>
         <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-area="admin" asp-controller="dashboard" asp-action="index">
             <i class="fa-solid fa-arrow-left me-1"></i> Go Dashboard

@@ -7,14 +7,18 @@ namespace Portfolio.Web.Controllers
     public class ContactController : Controller
     {
         readonly IEmailService _emailService;
+        readonly IAuthorService _authorService;
 
-        public ContactController(IEmailService emailService)
+        public ContactController(IEmailService emailService, IAuthorService authorService)
         {
             _emailService = emailService;
+            _authorService = authorService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var author = await _authorService.GetAsync();
+            var vm = new ContactVM { AuthorEmail = author.Data.Email, AuthorPhoneNumber = author.Data.PhoneNumber };
             return View();
         }
 
@@ -22,7 +26,7 @@ namespace Portfolio.Web.Controllers
         public async Task<IActionResult> SendEmail(ContactVM vm)
         {
             if (!ModelState.IsValid) return View(vm);
-            var result = await _emailService.SendEmailAsync(vm.Email, vm.Subject, vm.Body);
+            var result = await _emailService.SendEmailAsync(vm.Email, vm.Subject, vm.Body, true);
             if (!result.Result)
             {
                 ModelState.AddModelError("internalservererror", result.Message);
