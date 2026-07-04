@@ -13,6 +13,12 @@ builder.Services.AddIdentity<Author, IdentityRole>().AddEntityFrameworkStores<Ap
 //Services
 builder.Services.RegisterServices();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Admin/Auth/Login";
+    options.AccessDeniedPath = "/Admin/Auth/Login";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +33,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
