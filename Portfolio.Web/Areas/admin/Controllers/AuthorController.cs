@@ -25,18 +25,18 @@ namespace Portfolio.Web.Areas.admin.Controllers
             var author = await _service.GetAsync();
             var vm = new AuthorUpdateVM()
             {
-                Description = author.Description,
-                FirstName = author.FirstName,
-                LastName = author.LastName,
-                Location = author.Location,
-                Email = author.Email,
-                Info = author.Info,
-                isFreelanceAvailable = author.isFreelanceAvailable,
+                Description = author.Data.Description,
+                FirstName = author.Data.FirstName,
+                LastName = author.Data.LastName,
+                Location = author.Data.Location,
+                Email = author.Data.Email,
+                Info = author.Data.Info,
+                isFreelanceAvailable = author.Data.isFreelanceAvailable,
                 BirthDate = new DateVM
                 {
-                    Year = author.BirthDate.Year,
-                    Day = author.BirthDate.Day,
-                    Month = author.BirthDate.Month
+                    Year = author.Data.BirthDate.Year,
+                    Day = author.Data.BirthDate.Day,
+                    Month = author.Data.BirthDate.Month
                 }
             };
             return View(vm);
@@ -48,7 +48,11 @@ namespace Portfolio.Web.Areas.admin.Controllers
             if (!ModelState.IsValid) return View(vm);
 
             var result = await _service.UpdateAsync(vm);
-            return result ? RedirectToAction(nameof(Index)) : View(vm);
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult ChangeImage()
@@ -62,7 +66,11 @@ namespace Portfolio.Web.Areas.admin.Controllers
             if (!ModelState.IsValid) return View(vm);
 
             var result = await _service.ChangeImageAsync(vm);
-            return result ? RedirectToAction(nameof(Index)) : View(vm);
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,15 +1,16 @@
-﻿using Portfolio.Service.ViewModels.Speciality;
+﻿using Portfolio.Service.ViewModels.Response;
+using Portfolio.Service.ViewModels.Speciality;
 
 namespace Portfolio.Service.Services.Abstractions
 {
     public interface ISpecialityService
     {
-        Task<bool> CreateAsync(SpecialityCreateVM vm);
-        Task<List<SpecialityGetVM>> GetAsync();
-        Task<string> GetAllAsync();
-        Task<string> GetAsync(Guid id);
-        Task<bool> RemoveAsync(Guid id);
-        Task<bool> SetMainAsync(Guid id);
-        Task<bool> UpdateAsync(Guid id, SpecialityUpdateVM vm);
+        Task<ResponseVM> CreateAsync(SpecialityCreateVM vm);
+        Task<ResponseVM<List<SpecialityGetVM>>> GetAllAsync();
+        Task<ResponseVM<string>> GetMainAsync();
+        Task<ResponseVM<string>> GetAsync(Guid id);
+        Task<ResponseVM> RemoveAsync(Guid id);
+        Task<ResponseVM> SetMainAsync(Guid id);
+        Task<ResponseVM> UpdateAsync(Guid id, SpecialityUpdateVM vm);
     }
 }

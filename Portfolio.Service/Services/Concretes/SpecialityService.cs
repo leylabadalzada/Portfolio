@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Portfolio.Core.Constants;
+using Portfolio.Core.Enums;
 using Portfolio.Core.Models;
 using Portfolio.Data.Contexts;
-using Portfolio.Service.Exceptions;
 using Portfolio.Service.Extensions;
 using Portfolio.Service.Services.Abstractions;
+using Portfolio.Service.ViewModels.Response;
 using Portfolio.Service.ViewModels.Speciality;
 
 namespace Portfolio.Service.Services.Concretes
@@ -17,14 +19,15 @@ namespace Portfolio.Service.Services.Concretes
             _context = context;
         }
 
-        public async Task<List<SpecialityGetVM>> GetAsync()
+        public async Task<ResponseVM<List<SpecialityGetVM>>> GetAllAsync()
         {
-            var specialities = await _context.Specialities.AsNoTracking().OrderByDescending(s => s.CreatedAt).ToListAsync();
-            var vms = specialities.Select(s => s.ToSpecialityGetVM()).ToList();
-            return vms;
+            return new ResponseVM<List<SpecialityGetVM>>
+            {
+                Data = await _context.Specialities.AsNoTracking().OrderByDescending(s => s.CreatedAt).Select(s => s.ToSpecialityGetVM()).ToListAsync()
+            };
         }
 
-        public async Task<bool> CreateAsync(SpecialityCreateVM vm)
+        public async Task<ResponseVM> CreateAsync(SpecialityCreateVM vm)
         {
             var speciality = new Speciality
             {
@@ -33,63 +36,79 @@ namespace Portfolio.Service.Services.Concretes
             };
 
             var result = await _context.AddAsync(speciality);
-            if (result.State != EntityState.Added) return false;
+            if (result.State != EntityState.Added) return new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Add) };
             var saveCount = await _context.SaveChangesAsync();
-            return saveCount > 0;
+            return saveCount > 0 ? new ResponseVM { Message = ResponseMessage.SuccessMessage("Created") } : new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Save) };
         }
 
-        public async Task<string> GetAllAsync()
+        public async Task<ResponseVM<string>> GetMainAsync()
         {
-            var speciality = await _context.Specialities.AsNoTracking().FirstOrDefaultAsync(s => s.IsMain);
-            if (speciality == null) throw new NotFoundException("speciality");
-
-            return speciality.Name;
+            var speciality = await _context.Specialities.OrderByDescending(e => e.CreatedAt).AsNoTracking().FirstOrDefaultAsync(s => s.IsMain);
+            return speciality == null ? new ResponseVM<string>
+            {
+                Message = ResponseMessage.NotFoundMessage("Speciality"),
+                Result = false
+            } : new ResponseVM<string> { Data = speciality.Name };
         }
 
-        public async Task<string> GetAsync(Guid id)
-        {
-            var speciality = await _context.Specialities.FindAsync(id);
-            if (speciality == null) throw new NotFoundException("speciality");
-
-            return speciality.Name;
-        }
-
-        public async Task<bool> SetMainAsync(Guid id)
+        public async Task<ResponseVM<string>> GetAsync(Guid id)
         {
             var speciality = await _context.Specialities.FindAsync(id);
-            if (speciality == null) throw new NotFoundException("speciality");
+            return speciality == null ? new ResponseVM<string>
+            {
+                Message = ResponseMessage.NotFoundMessage("Speciality"),
+                Result = false
+            } : new ResponseVM<string> { Data = speciality.Name };
+        }
+
+        public async Task<ResponseVM> SetMainAsync(Guid id)
+        {
+            var speciality = await _context.Specialities.FindAsync(id);
+            if (speciality == null) return new ResponseVM
+            {
+                Message = ResponseMessage.NotFoundMessage("Speciality"),
+                Result = false
+            };
 
             speciality.IsMain = true;
 
             var result = _context.Update(speciality);
-            if (result.State != EntityState.Modified) return false;
+            if (result.State != EntityState.Modified) return new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Update) };
             var saveCount = await _context.SaveChangesAsync();
-            return saveCount > 0;
+            return saveCount > 0 ? new ResponseVM { Message = ResponseMessage.SuccessMessage("Updated") } : new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Save) };
         }
 
-        public async Task<bool> RemoveAsync(Guid id)
+        public async Task<ResponseVM> RemoveAsync(Guid id)
         {
             var speciality = await _context.Specialities.FindAsync(id);
-            if (speciality == null) throw new NotFoundException("speciality");
+            if (speciality == null) return new ResponseVM
+            {
+                Message = ResponseMessage.NotFoundMessage("Speciality"),
+                Result = false
+            };
 
 
             var result = _context.Remove(speciality);
-            if (result.State != EntityState.Deleted) return false;
+            if (result.State != EntityState.Deleted) return new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Update) };
             var saveCount = await _context.SaveChangesAsync();
-            return saveCount > 0;
+            return saveCount > 0 ? new ResponseVM { Message = ResponseMessage.SuccessMessage("Removed") } : new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Save) };
         }
 
-        public async Task<bool> UpdateAsync(Guid id, SpecialityUpdateVM vm)
+        public async Task<ResponseVM> UpdateAsync(Guid id, SpecialityUpdateVM vm)
         {
             var speciality = await _context.Specialities.FindAsync(id);
-            if (speciality == null) throw new NotFoundException("speciality");
+            if (speciality == null) return new ResponseVM
+            {
+                Message = ResponseMessage.NotFoundMessage("Speciality"),
+                Result = false
+            };
 
             speciality.Name = vm.Name;
 
             var result = _context.Update(speciality);
-            if (result.State != EntityState.Modified) return false;
+            if (result.State != EntityState.Modified) return new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Update) };
             var saveCount = await _context.SaveChangesAsync();
-            return saveCount > 0;
+            return saveCount > 0 ? new ResponseVM { Message = ResponseMessage.SuccessMessage("Updated") } : new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Save) };
         }
     }
 }

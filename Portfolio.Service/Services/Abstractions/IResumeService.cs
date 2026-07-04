@@ -1,14 +1,15 @@
-﻿using Portfolio.Service.ViewModels.Resumes;
+﻿using Portfolio.Service.ViewModels.Response;
+using Portfolio.Service.ViewModels.Resumes;
 
 namespace Portfolio.Service.Services.Abstractions
 {
     public interface IResumeService
     {
-        Task<bool> CreateAsync(ResumeCreateVM vm);
-        public Task<List<ResumeGetVM>> GetAsync();
-        Task<ResumeGetVM> GetSelectedResumeAsync();
-        Task<bool> RemoveAsync(Guid id);
-        Task<bool> SelectResumeAsync(Guid id);
+        Task<ResponseVM> CreateAsync(ResumeCreateVM vm);
+        public Task<ResponseVM<List<ResumeGetVM>>> GetAsync();
+        Task<ResponseVM<ResumeGetVM>> GetSelectedResumeAsync();
+        Task<ResponseVM> RemoveAsync(Guid id);
+        Task<ResponseVM> SelectResumeAsync(Guid id);
     }
 }
 

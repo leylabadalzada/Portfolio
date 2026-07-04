@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Core.Constants;
+using Portfolio.Core.Enums;
 using Portfolio.Data.Contexts;
 using Portfolio.Service.Exceptions;
 using Portfolio.Service.Extensions;
 using Portfolio.Service.Services.Abstractions;
 using Portfolio.Service.Utils;
 using Portfolio.Service.ViewModels.Author;
+using Portfolio.Service.ViewModels.Response;
 
 namespace Portfolio.Service.Services.Concretes
 {
@@ -21,20 +23,20 @@ namespace Portfolio.Service.Services.Concretes
             _env = env;
         }
 
-        public async Task<List<AuthorGetVM>> GetAllAsync()
+        public async Task<ResponseVM<List<AuthorGetVM>>> GetAllAsync()
         {
             var query = _context.Authors.AsNoTracking();
-            return await query.Select(author => author.ToAuthorGetVM()).ToListAsync();
+            return new ResponseVM<List<AuthorGetVM>> { Data = await query.Select(author => author.ToAuthorGetVM()).ToListAsync() };
         }
 
-        public async Task<AuthorGetVM> GetAsync()
+        public async Task<ResponseVM<AuthorGetVM>> GetAsync()
         {
             var author = await _context.Authors.AsNoTracking().FirstOrDefaultAsync();
-            if (author == null) throw new NotFoundException("Author");
-            return author.ToAuthorGetVM();
+            if (author == null) return new ResponseVM<AuthorGetVM> { Result = false, Message = ResponseMessage.NotFoundMessage("Author") };
+            return new ResponseVM<AuthorGetVM> { Data = author.ToAuthorGetVM() };
         }
 
-        public async Task<bool> ChangeImageAsync(ChangeImageVM vm)
+        public async Task<ResponseVM> ChangeImageAsync(ChangeImageVM vm)
         {
             var author = await _context.Authors.FirstOrDefaultAsync();
             if (author == null) throw new NotFoundException("Author");
@@ -45,13 +47,12 @@ namespace Portfolio.Service.Services.Concretes
             }
 
             author.ImageName = vm.NewImage.UploadFile(_env.WebRootPath, FilePaths.AuthorPath);
-            //author.ImageName = Path.Combine(_url, author.ImageName);
 
             var saveCount = await _context.SaveChangesAsync();
-            return saveCount > 0;
+            return saveCount > 0 ? new ResponseVM { Message = ResponseMessage.SuccessMessage("Image changed") } : new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Save) };
         }
 
-        public async Task<bool> UpdateAsync(AuthorUpdateVM vm)
+        public async Task<ResponseVM> UpdateAsync(AuthorUpdateVM vm)
         {
             var author = await _context.Authors.FirstOrDefaultAsync();
             if (author == null) throw new NotFoundException("Author");
@@ -65,9 +66,9 @@ namespace Portfolio.Service.Services.Concretes
             author.isFreelanceAvailable = vm.isFreelanceAvailable.Value;
             author.BirthDate = DateOnlyUtils.GenerateDate(vm.BirthDate.Day, vm.BirthDate.Month, vm.BirthDate.Year);
             var result = _context.Update(author);
-            if (result.State != EntityState.Modified) return false;
+            if (result.State != EntityState.Modified) return new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Update) };
             var saveCount = await _context.SaveChangesAsync();
-            return saveCount > 0;
+            return saveCount > 0 ? new ResponseVM { Message = ResponseMessage.SuccessMessage("Updated") } : new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Save) };
         }
     }
 }

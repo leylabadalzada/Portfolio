@@ -43,7 +43,7 @@ namespace Portfolio.Service.Services.Concretes
             var skills = _context.Skills.Include(s => s.Field).AsNoTracking();
             return new ResponseVM<List<SkillGetVM>>
             {
-                Data = await skills.Select(skill => skill.ToSkillGetVM()).ToListAsync(),
+                Data = await skills.OrderByDescending(e => e.CreatedAt).Select(skill => skill.ToSkillGetVM()).ToListAsync(),
                 Message = $"Count:{skills.Count()}"
             };
         }

@@ -37,7 +37,11 @@ namespace Portfolio.Web.Areas.admin.Controllers
         {
             if (!ModelState.IsValid) return View(vm);
             var result = await _service.CreateAsync(vm);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Create failed.");
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Update(Guid id)
@@ -45,8 +49,8 @@ namespace Portfolio.Web.Areas.admin.Controllers
             var language = await _service.GetSingleAsync(id);
             var vm = new LanguageCreateOrUpdateVM
             {
-                Level = language.Level,
-                Name = language.Name
+                Level = language.Data.Level,
+                Name = language.Data.Name
             };
             ViewBag.Levels = Enum.GetValues<LanguageValue>()
                .Select(sm => new SelectListItem
@@ -62,14 +66,22 @@ namespace Portfolio.Web.Areas.admin.Controllers
         {
             if (!ModelState.IsValid) return View(vm);
             var result = await _service.UpdateAsync(id, vm);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest();
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         public async Task<IActionResult> Remove(Guid id)
         {
             var result = await _service.RemoveAsync(id);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest();
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

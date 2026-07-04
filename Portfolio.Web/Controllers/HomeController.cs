@@ -19,11 +19,14 @@ namespace Portfolio.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var author = await _authorService.GetAsync();
+            var specialities = await _specialityService.GetAllAsync();
+            var resume = await _resumeService.GetSelectedResumeAsync();
             var vm = new HomeVM()
             {
-                Author = await _authorService.GetAsync(),
-                Resume = await _resumeService.GetSelectedResumeAsync(),
-                Specialities = await _specialityService.GetAsync()
+                Author = author.Data,
+                Resume = resume.Data,
+                Specialities = specialities.Data
             };
             return View(vm);
         }

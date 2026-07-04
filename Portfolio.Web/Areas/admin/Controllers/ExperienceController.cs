@@ -31,14 +31,22 @@ namespace Portfolio.Web.Areas.admin.Controllers
             if (!ModelState.IsValid) return View(vm);
 
             var result = await _service.CreateAsync(vm);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Create failed.");
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         public async Task<IActionResult> Remove(Guid id)
         {
             var result = await _service.RemoveAsync(id);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Remove failed.");
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Update(Guid id)
@@ -46,12 +54,12 @@ namespace Portfolio.Web.Areas.admin.Controllers
             var education = await _service.GetAsync(id);
             var vm = new ExperienceCreateOrUpdateVM
             {
-                Description = education.Description,
-                Position = education.Position,
-                isContinuing = education.isContinuing,
-                Company = education.Company,
-                StartDate = new DateVM { Day = education.StartDate.Value.Day, Month = education.StartDate.Value.Month, Year = education.StartDate.Value.Year },
-                EndDate = education.EndDate != null ? new DateVM { Day = education.EndDate.Value.Day, Month = education.EndDate.Value.Month, Year = education.EndDate.Value.Year } : null
+                Description = education.Data.Description,
+                Position = education.Data.Position,
+                isContinuing = education.Data.isContinuing,
+                Company = education.Data.Company,
+                StartDate = new DateVM { Day = education.Data.StartDate.Value.Day, Month = education.Data.StartDate.Value.Month, Year = education.Data.StartDate.Value.Year },
+                EndDate = education.Data.EndDate != null ? new DateVM { Day = education.Data.EndDate.Value.Day, Month = education.Data.EndDate.Value.Month, Year = education.Data.EndDate.Value.Year } : null
             };
             return View(vm);
         }
@@ -62,7 +70,11 @@ namespace Portfolio.Web.Areas.admin.Controllers
             if (!ModelState.IsValid) return View(vm);
 
             var result = await _service.UpdateAsync(id, vm);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Update failed.");
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

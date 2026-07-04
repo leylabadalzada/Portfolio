@@ -16,7 +16,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _service.GetAsync());
+            return View(await _service.GetAllAsync());
         }
 
         public IActionResult Create()
@@ -28,26 +28,27 @@ namespace Portfolio.Web.Areas.admin.Controllers
         public async Task<IActionResult> Create(SpecialityCreateVM vm)
         {
             var result = await _service.CreateAsync(vm);
-            return result ? RedirectToAction(nameof(Index)) : View(vm);
+            return result.Result ? RedirectToAction(nameof(Index)) : View(vm);
         }
 
         [HttpPost]
         public async Task<IActionResult> SetMain(Guid id)
         {
             var result = await _service.SetMainAsync(id);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+            return result.Result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
         }
 
         [HttpPost]
         public async Task<IActionResult> Remove(Guid id)
         {
             var result = await _service.RemoveAsync(id);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+            return result.Result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
         }
 
         public async Task<IActionResult> Update(Guid id)
         {
-            var vm = new SpecialityUpdateVM() { Name = await _service.GetAsync(id) };
+            var name = await _service.GetAsync(id);
+            var vm = new SpecialityUpdateVM() { Name = name.Data };
             return View(vm);
 
         }
@@ -56,7 +57,7 @@ namespace Portfolio.Web.Areas.admin.Controllers
         public async Task<IActionResult> Update(Guid id, SpecialityUpdateVM vm)
         {
             var result = await _service.UpdateAsync(id, vm);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+            return result.Result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
         }
     }
 }

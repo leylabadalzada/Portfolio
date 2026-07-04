@@ -1,4 +1,4 @@
-﻿@model List<LanguageGetVM>
+﻿@model ResponseVM<List<LanguageGetVM>>
 
 <div class="container my-5">
 
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var language in Model)
+                @foreach (var language in Model.Data)
                 {
                     <tr>
                         <th scope="row">@language.Id</th>

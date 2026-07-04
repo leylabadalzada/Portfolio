@@ -21,7 +21,7 @@ namespace Portfolio.Service.Services.Concretes
             return new ResponseVM<List<FieldGetVM>>
             {
                 Result = true,
-                Data = await _context.Fields.Select(field => field.ToFieldGetVM()).ToListAsync()
+                Data = await _context.Fields.AsNoTracking().OrderByDescending(e => e.CreatedAt).Select(field => field.ToFieldGetVM()).ToListAsync()
             };
         }
 

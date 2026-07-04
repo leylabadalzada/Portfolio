@@ -46,7 +46,7 @@ namespace Portfolio.Service.Services.Concretes
         public async Task<ResponseVM<List<ProjectGetVM>>> GetAllAsync()
         {
             var projects = _context.Projects.AsNoTracking();
-            var dtos = await projects.Select(project => project.ToProjectGetVM()).ToListAsync();
+            var dtos = await projects.OrderByDescending(e => e.CreatedAt).Select(project => project.ToProjectGetVM()).ToListAsync();
             return new ResponseVM<List<ProjectGetVM>> { Data = dtos, Message = $"Count: {projects.Count()}" };
         }
 

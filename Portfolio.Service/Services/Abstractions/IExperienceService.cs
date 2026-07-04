@@ -1,14 +1,15 @@
 ﻿using Portfolio.Service.ViewModels.Experience;
+using Portfolio.Service.ViewModels.Response;
 
 namespace Portfolio.Service.Services.Abstractions
 {
     public interface IExperienceService
     {
-        Task<bool> CreateAsync(ExperienceCreateOrUpdateVM vm);
-        Task<bool> RemoveAsync(Guid id);
-        Task<bool> UpdateAsync(Guid id, ExperienceCreateOrUpdateVM vm);
+        Task<ResponseVM> CreateAsync(ExperienceCreateOrUpdateVM vm);
+        Task<ResponseVM> RemoveAsync(Guid id);
+        Task<ResponseVM> UpdateAsync(Guid id, ExperienceCreateOrUpdateVM vm);
 
-        Task<List<ExperienceGetVM>> GetAllAsync();
-        Task<ExperienceGetVM> GetAsync(Guid id);
+        Task<ResponseVM<List<ExperienceGetVM>>> GetAllAsync();
+        Task<ResponseVM<ExperienceGetVM>> GetAsync(Guid id);
     }
 }

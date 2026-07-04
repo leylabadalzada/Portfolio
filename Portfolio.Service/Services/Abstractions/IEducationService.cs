@@ -1,13 +1,14 @@
 ﻿using Portfolio.Service.ViewModels.Education;
+using Portfolio.Service.ViewModels.Response;
 
 namespace Portfolio.Service.Services.Abstractions
 {
     public interface IEducationService
     {
-        Task<bool> CreateAsync(EducationCreateOrUpdateVM vm);
-        Task<List<EducationGetVM>> GetAllAsync();
-        Task<EducationGetVM> GetAsync(Guid id);
-        Task<bool> RemoveAsync(Guid id);
-        Task<bool> UpdateAsync(Guid id, EducationCreateOrUpdateVM vm);
+        Task<ResponseVM> CreateAsync(EducationCreateOrUpdateVM vm);
+        Task<ResponseVM<List<EducationGetVM>>> GetAllAsync();
+        Task<ResponseVM<EducationGetVM>> GetAsync(Guid id);
+        Task<ResponseVM> RemoveAsync(Guid id);
+        Task<ResponseVM> UpdateAsync(Guid id, EducationCreateOrUpdateVM vm);
     }
 }

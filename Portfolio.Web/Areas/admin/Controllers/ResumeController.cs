@@ -29,20 +29,32 @@ namespace Portfolio.Web.Areas.admin.Controllers
         {
             if (!ModelState.IsValid) return View(vm);
             var result = await _service.CreateAsync(vm);
-            return result ? RedirectToAction(nameof(Index)) : View(vm);
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         public async Task<IActionResult> SelectResumeAsync(Guid id)
         {
             var result = await _service.SelectResumeAsync(id);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
         [HttpPost]
         public async Task<IActionResult> Remove(Guid id)
         {
             var result = await _service.RemoveAsync(id);
-            return result ? RedirectToAction(nameof(Index)) : BadRequest("Failed");
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

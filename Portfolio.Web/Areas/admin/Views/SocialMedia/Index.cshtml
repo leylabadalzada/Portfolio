@@ -1,4 +1,4 @@
-﻿@model List<SocialMediaGetVM>
+﻿@model ResponseVM<List<SocialMediaGetVM>>
 
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var media in Model)
+                @foreach (var media in Model.Data)
                 {
                     <tr>
                         <th scope="row">@media.Id</th>

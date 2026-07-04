@@ -1,12 +1,13 @@
 ﻿using Portfolio.Service.ViewModels.Author;
+using Portfolio.Service.ViewModels.Response;
 
 namespace Portfolio.Service.Services.Abstractions
 {
     public interface IAuthorService
     {
-        Task<bool> ChangeImageAsync(ChangeImageVM vm);
-        Task<List<AuthorGetVM>> GetAllAsync();
-        Task<AuthorGetVM> GetAsync();
-        Task<bool> UpdateAsync(AuthorUpdateVM vm);
+        Task<ResponseVM> ChangeImageAsync(ChangeImageVM vm);
+        Task<ResponseVM<List<AuthorGetVM>>> GetAllAsync();
+        Task<ResponseVM<AuthorGetVM>> GetAsync();
+        Task<ResponseVM> UpdateAsync(AuthorUpdateVM vm);
     }
 }

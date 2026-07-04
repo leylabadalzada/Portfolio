@@ -25,14 +25,20 @@ namespace Portfolio.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var Author = await _authorService.GetAsync();
+            var Speciality = await _specialityService.GetMainAsync();
+            var SocialMedias = await _socialMediaService.GetAllAsync();
+            var Languages = await _languageService.GetAllAsync();
+            var Education = await _educationService.GetAllAsync();
+            var Experiences = await _experienceService.GetAllAsync();
             var vm = new AboutVM
             {
-                Author = await _authorService.GetAsync(),
-                Speciality = await _specialityService.GetAllAsync(),
-                SocialMedias = await _socialMediaService.GetAllAsync(),
-                Languages = await _languageService.GetAllAsync(),
-                Education = await _educationService.GetAllAsync(),
-                Experiences = await _experienceService.GetAllAsync()
+                Author = Author.Data,
+                Education = Education.Data,
+                Experiences = Experiences.Data,
+                Languages = Languages.Data,
+                SocialMedias = SocialMedias.Data,
+                Speciality = Speciality.Data
             };
             return View(vm);
         }

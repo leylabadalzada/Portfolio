@@ -1,4 +1,4 @@
-﻿@model AuthorGetVM
+﻿@model ResponseVM<AuthorGetVM>
 
 <div class="container my-5">
     <h2 class="text-dark mb-4">Author Details</h2>
@@ -21,17 +21,17 @@
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">@Model.Id</th>
-                    <td>@Model.FirstName</td>
-                    <td>@Model.LastName</td>
-                    <td>@Model.Email</td>
-                    <td>@Model.Info</td>
-                    <td>@Model.Description</td>
-                    <td>@Model.Location</td>
-                    <td>@Model.BirthDate</td>
-                    <td>@(Model.isFreelanceAvailable == true ? "Yes" : "No")</td>
+                    <th scope="row">@Model.Data.Id</th>
+                    <td>@Model.Data.FirstName</td>
+                    <td>@Model.Data.LastName</td>
+                    <td>@Model.Data.Email</td>
+                    <td>@Model.Data.Info</td>
+                    <td>@Model.Data.Description</td>
+                    <td>@Model.Data.Location</td>
+                    <td>@Model.Data.BirthDate</td>
+                    <td>@(Model.Data.isFreelanceAvailable == true ? "Yes" : "No")</td>
                     <td>
-                        <img src="~/assets/images/authors/@Model.ImageName"
+                        <img src="~/assets/images/authors/@Model.Data.ImageName"
                              class="rounded border"
                              width="60"
                              height="60"
