@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Portfolio.Service.Services.Abstractions;
 using Portfolio.Service.ViewModels.Author;
 using Portfolio.Service.ViewModels.General;
+using System.Security.Claims;
 
 namespace Portfolio.Web.Areas.admin.Controllers
 {
     [Area("admin")]
+    [Authorize]
     public class AuthorController : Controller
     {
         readonly IAuthorService _service;
@@ -113,8 +116,64 @@ namespace Portfolio.Web.Areas.admin.Controllers
                 ModelState.AddModelError("internalError", result.Message!);
                 return View(vm);
             }
+            TempData["SuccessMessage"] = "Email uğurla yeniləndi!";
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CheckPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CheckPassword(string password)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                ModelState.AddModelError("internalError", "User not found!");
+                return View(password);
+            }
+            var result = await _service.CheckPasswordAsync(userId, password);
+            TempData["UserId"] = userId;
+            TempData["CurrentPassword"] = password;
+            if (!result.Result)
+            {
+                ModelState.AddModelError("", result.Message!);
+                return View(nameof(CheckPassword), password);
+            }
+
+            return RedirectToAction(nameof(ChangePassword));
+        }
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordVM vm)
+        {
+            if (!ModelState.IsValid) return View(vm);
+            var currentPassword = TempData["CurrentPassword"]?.ToString();
+
+            // TempData bir dəfə oxunandan sonra silinir
+            TempData.Keep("CurrentPassword");
+
+
+            var userId = TempData["UserId"]?.ToString();
+            TempData.Keep("UserId");
+            var result = await _service.ChangePasswordAsync(vm, userId, currentPassword);
+
+            if (!result.Result)
+            {
+                ModelState.AddModelError("internalError", result.Message!);
+                return View(vm);
+            }
+            TempData["SuccessMessage"] = "Şifrə uğurla yeniləndi!";
             return RedirectToAction(nameof(Index));
         }
     }
 }
+

@@ -1,6 +1,6 @@
 ﻿namespace Portfolio.Service.ViewModels.Author
 {
-    public class VerifyEmailVM
+    public record VerifyEmailVM
     {
         public int OtpCode { get; set; }
     }

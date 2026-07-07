@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Portfolio.Service.Services.Abstractions;
 using Portfolio.Service.ViewModels.Speciality;
 
 namespace Portfolio.Web.Areas.admin.Controllers
 {
     [Area("admin")]
+    [Authorize]
     public class SpecialityController : Controller
     {
         readonly ISpecialityService _service;

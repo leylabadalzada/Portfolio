@@ -4,7 +4,7 @@
     <h3 class="mb-4 text-dark">Update Author Information</h3>
 
     <form asp-controller="author" asp-action="update" method="post" enctype="multipart/form-data">
-
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group mb-3">
             <label asp-for="FirstName" class="form-label mb-2">FirstName</label>
             <input asp-for="FirstName" class="form-control" placeholder="E.G John">

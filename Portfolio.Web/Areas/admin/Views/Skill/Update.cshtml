@@ -4,7 +4,7 @@
     <h3 class="mb-4 text-dark">Update Skill</h3>
 
     <form asp-controller="skill" asp-action="update" method="post">
-
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group mb-3">
             <label asp-for="Name" class="form-label mb-2">Skill</label>
             <select asp-for="Name" asp-items="ViewBag.Skills" class="form-control">

@@ -26,7 +26,7 @@
             <h3 class="text-center mb-4">Admin Login</h3>
 
             <form asp-controller="auth" asp-action="login" method="post">
-
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="mb-3">
                     <label asp-for="Username" class="form-label"></label>
                     <input asp-for="Username" class="form-control" />
@@ -38,6 +38,8 @@
                     <input asp-for="Password" type="password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger small"></span>
                 </div>
+
+                <a asp-action="forgotpassword">Forgot password?</a>
 
                 <div class="d-flex justify-content-between align-items-center mt-4">
 

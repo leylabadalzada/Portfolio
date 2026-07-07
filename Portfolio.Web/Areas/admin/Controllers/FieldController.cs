@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Portfolio.Service.Services.Abstractions;
 using Portfolio.Service.ViewModels.Field;
 
 namespace Portfolio.Web.Areas.admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class FieldController : Controller
     {
         readonly IFieldService _service;

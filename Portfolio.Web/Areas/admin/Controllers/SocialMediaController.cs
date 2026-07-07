@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Portfolio.Core.Enums;
 using Portfolio.Service.Services.Abstractions;
@@ -7,6 +8,7 @@ using Portfolio.Service.ViewModels.SocialMedia;
 namespace Portfolio.Web.Areas.admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class SocialMediaController : Controller
     {
         readonly ISocialMediaService _service;

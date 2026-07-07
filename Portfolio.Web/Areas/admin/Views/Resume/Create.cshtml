@@ -4,7 +4,7 @@
     <h3 class="mb-4 text-dark">Upload Resume</h3>
 
     <form asp-controller="resume" asp-action="create" method="post" enctype="multipart/form-data">
-
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group mb-4">
             <label asp-for="File" class="form-label mb-2">Resume</label>
             <input asp-for="File" type="file" class="form-control" aria-describedby="emailHelp">

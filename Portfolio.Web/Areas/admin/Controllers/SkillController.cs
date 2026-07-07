@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Portfolio.Core.Enums;
 using Portfolio.Service.Services.Abstractions;
@@ -8,6 +9,7 @@ using Portfolio.Service.ViewModels.Skill;
 namespace Portfolio.Web.Areas.admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class SkillController : Controller
     {
         readonly ISkillService _skillService;

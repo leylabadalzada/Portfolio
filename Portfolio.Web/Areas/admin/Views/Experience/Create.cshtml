@@ -4,7 +4,7 @@
     <h3 class="mb-4 text-dark">Create Experience</h3>
 
     <form asp-controller="Experience" asp-action="Create" method="post">
-
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group mb-3">
             <label asp-for="Company" class="form-label mb-2">Company</label>
             <input asp-for="Company" class="form-control" />

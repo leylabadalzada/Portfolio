@@ -86,5 +86,22 @@ namespace Portfolio.Service.Services.Concretes
             return update.Succeeded ? new ResponseVM { Message = "Email changed successfully!" } :
                 new ResponseVM { Result = false, Message = update.Errors.FirstOrDefault().Description };
         }
+
+        public async Task<ResponseVM> ChangePasswordAsync(ChangePasswordVM vm, string authorId, string currentPassword)
+        {
+            var author = await _userManager.FindByIdAsync(authorId);
+            if (author == null) return new ResponseVM { Result = false, Message = ResponseMessage.NotFoundMessage("user") };
+            var result = await _userManager.ChangePasswordAsync(author, currentPassword, vm.NewPassword);
+            return result.Succeeded ? new ResponseVM { Message = "Password changed successfully!." } : new ResponseVM { Message = result.Errors.First().Description, Result = false };
+
+        }
+
+        public async Task<ResponseVM> CheckPasswordAsync(string authorId, string currentPaswrod)
+        {
+            var author = await _userManager.FindByIdAsync(authorId);
+            if (author == null) return new ResponseVM { Result = false, Message = ResponseMessage.NotFoundMessage("user") };
+            var result = await _userManager.CheckPasswordAsync(author, currentPaswrod);
+            return result ? new ResponseVM { Message = "Type new password." } : new ResponseVM { Message = "Password is not correct", Result = false };
+        }
     }
 }

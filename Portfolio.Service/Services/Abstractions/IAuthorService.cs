@@ -10,6 +10,7 @@ namespace Portfolio.Service.Services.Abstractions
         Task<ResponseVM> UpdateAsync(AuthorUpdateVM vm);
         Task<ResponseVM> ChangeEmailAsync(string email);
         Task<ResponseVM> VerifyEmailAsync(string email, int otp);
-        //todo: ChangePassword
+        Task<ResponseVM> CheckPasswordAsync(string authorId, string currentPaswrod);
+        Task<ResponseVM> ChangePasswordAsync(ChangePasswordVM vm, string authorId, string currentPassword);
     }
 }

@@ -1,8 +1,9 @@
 ﻿@model SpecialityCreateVM
 
 <div class="container my-5">
-    <h3 class="mb-4 text-dark">Create Speciality Media</h3> <form asp-controller="speciality" asp-action="create" method="post">
-
+    <h3 class="mb-4 text-dark">Create Speciality Media</h3> 
+    <form asp-controller="speciality" asp-action="create" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group mb-3">
         <label asp-for="Name" class="form-label mb-2">Name</label>
         <input asp-for="Name" class="form-control" aria-describedby="emailHelp">

@@ -24,6 +24,7 @@
         <div class="row">
             <div class="contact-form padd-15">
                 <form asp-controller="contact" asp-action="sendemail" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="row">
                         <div class="form-item col-6 padd-15">
                             <div class="form-group">
