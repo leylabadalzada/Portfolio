@@ -132,7 +132,8 @@ namespace Portfolio.Service.Extensions
                 Id = skill.ID.ToString(),
                 CreatedAt = skill.CreatedAt,
                 FieldId = skill.FieldId.ToString(),
-                Description = skill.Description,
+                LevelAsString = skill.Level.ToString(),
+                Level = skill.Level,
                 Name = skill.Name,
                 UpdatedAt = skill.UpdatedAt,
                 FieldName = skill.Field.FieldName

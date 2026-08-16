@@ -26,7 +26,7 @@ namespace Portfolio.Service.Services.Concretes
             var skill = new Skill
             {
                 Name = vm.Name,
-                Description = vm.Description,
+                Level = vm.Level,
                 FieldId = field.ID
             };
 
@@ -76,7 +76,7 @@ namespace Portfolio.Service.Services.Concretes
             if (skill == null) return new ResponseVM { Result = false, Message = ResponseMessage.NotFoundMessage("Skill") };
 
             skill.Name = vm.Name;
-            skill.Description = vm.Description;
+            skill.Level = vm.Level;
 
             var result = _context.Update(skill);
             if (result.State != EntityState.Modified) return new ResponseVM { Result = false, Message = ResponseMessage.FailMessage(ResponseMessageContent.Update) };

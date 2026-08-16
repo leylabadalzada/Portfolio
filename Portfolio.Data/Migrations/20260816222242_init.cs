@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Portfolio.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -329,7 +329,7 @@ namespace Portfolio.Data.Migrations
                 {
                     ID = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<int>(type: "integer", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Level = table.Column<int>(type: "integer", nullable: false),
                     FieldId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -348,17 +348,22 @@ namespace Portfolio.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "34015e97-b5b7-424c-89fa-dde09d9c2cf1", null, "Author", "AUTHOR" });
+                values: new object[] { "9191baef-c38a-4b33-bfc8-a0d3c830a0bc", null, "Author", "AUTHOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "BirthDate", "ConcurrencyStamp", "CreatedAt", "Description", "Discriminator", "Email", "EmailConfirmed", "FirstName", "ImageName", "Info", "LastName", "Location", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedAt", "UserName", "isFreelanceAvailable" },
-                values: new object[] { "066cde51-d208-4f7f-8c98-087a20948672", 3, new DateOnly(1, 1, 1), "90e37a90-0216-4db1-a777-7251e1b4a229", new DateTime(2026, 7, 5, 0, 24, 7, 301, DateTimeKind.Utc).AddTicks(6258), "Sample Developer Description", "Author", "email@sample.domain", true, "FirstName", "default.png", "Sample Developer Information", "Lastname", "Location", true, null, "EMAIL@SAMLE.DOMAIN", "AUTHOR123", "AQAAAAIAAYagAAAAEHfbLbP0v7P/Ur8ePBOjbwmwtoLhW1UQAOhZGwqZyZsdx9nVvAbwm+4dIuKipzALAQ==", "+994123456789", true, "a13f14b1-43b5-465e-911c-9b9298fb4d5c", false, null, "author123", true });
+                values: new object[] { "354a8bab-1478-45f7-83d6-f9ca2ba94135", 3, new DateOnly(1, 1, 1), "18a1bb1e-d0e7-4a08-80d1-64a33508bed6", new DateTime(2026, 8, 17, 2, 22, 41, 902, DateTimeKind.Utc).AddTicks(9166), "Sample Developer Level", "Author", "email@sample.domain", true, "FirstName", "default.png", "Sample Developer Information", "Lastname", "Location", true, null, "EMAIL@SAMLE.DOMAIN", "AUTHOR123", "AQAAAAIAAYagAAAAEDlgyl3nbU/yfKSWSeejPNcWSH1ruCzzkYZ9w/CmGpD7y4VI35COsOrCFme0KrgCqw==", "+994123456789", true, "fbfe9079-df7a-45c3-b1bb-54cb036e771d", false, null, "author123", true });
+
+            migrationBuilder.InsertData(
+                table: "Specialities",
+                columns: new[] { "ID", "CreatedAt", "IsMain", "Name", "UpdatedAt" },
+                values: new object[] { new Guid("2dae2e5f-3d58-444d-b40c-23ee8e0bd281"), new DateTime(2026, 8, 16, 22, 22, 41, 953, DateTimeKind.Utc).AddTicks(2767), true, "Some speciality", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "34015e97-b5b7-424c-89fa-dde09d9c2cf1", "066cde51-d208-4f7f-8c98-087a20948672" });
+                values: new object[] { "9191baef-c38a-4b33-bfc8-a0d3c830a0bc", "354a8bab-1478-45f7-83d6-f9ca2ba94135" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

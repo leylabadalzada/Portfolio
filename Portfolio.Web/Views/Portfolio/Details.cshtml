@@ -1,11 +1,22 @@
 ﻿@model ProjectGetVM
+<style>
+    .back-link {
+        z-index: 10; /* Kliklənməni təmin edir */
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
 
+        .back-link:hover {
+            color: #198754 !important; /* Bootstrap success rəngi */
+            transform: translateX(-3px); /* Sol tərəfə incə hərəkət effekti */
+        }
+</style>
 <section class="project-details section py-5" id="project-details">
     <div class="container py-4">
         
         <div class="row mb-4">
             <div class="col-12">
-                <a asp-controller="portfolio" asp-action="Index" class="text-decoration-none text-muted small fw-medium d-inline-flex align-items-center gap-1 hover-success">
+                <a asp-controller="portfolio" asp-action="Index"
+                   class="text-decoration-none text-muted small fw-medium d-inline-flex align-items-center gap-1 back-link position-relative">
                     <i class="fas fa-arrow-left"></i> Back to Projects
                 </a>
             </div>

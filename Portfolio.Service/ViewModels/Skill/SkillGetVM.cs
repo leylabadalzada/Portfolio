@@ -6,7 +6,8 @@ namespace Portfolio.Service.ViewModels.Skill
     {
         public string Id { get; set; }
         public SkillType Name { get; set; }
-        public string Description { get; set; }
+        public SkillLevel Level { get; set; }
+        public string LevelAsString { get; set; }
         public string FieldId { get; set; }
         public string FieldName { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -19,7 +19,7 @@ namespace Portfolio.Data.Seeders
                 Location = "Location",
                 Email = "email@sample.domain",
                 BirthDate = DateOnly.MinValue,
-                Description = "Sample Developer Description",
+                Description = "Sample Developer Level",
                 CreatedAt = TimeConstants.AzerbaijaniTime,
                 isFreelanceAvailable = true,
                 NormalizedEmail = "EMAIL@SAMLE.DOMAIN",

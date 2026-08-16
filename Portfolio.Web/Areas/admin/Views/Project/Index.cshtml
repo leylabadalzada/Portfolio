@@ -1,71 +1,236 @@
 ﻿@model ResponseVM<List<ProjectGetVM>>
 
-<div class="container my-5">
+<style>
+    /* Aside menyusu ilə toqquşmaması üçün */
+    .admin-projects-wrapper {
+        box-sizing: border-box;
+    }
 
+    /* Müasir Cədvəl Kartı */
+    .admin-table-card {
+        background: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #eef2f5;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        overflow: hidden;
+    }
+
+    .custom-admin-table {
+        margin-bottom: 0;
+        white-space: nowrap; /* Sütunların üst-üstə minməsini önləyir */
+    }
+
+        .custom-admin-table thead th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 14px 16px;
+        }
+
+        .custom-admin-table tbody td,
+        .custom-admin-table tbody th {
+            padding: 14px 16px;
+            color: #334155;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+    /* Uzun mətni 2 sətirdə saxlayıb cədvəli genəltməyən xüsusi box */
+    .desc-scroll-box {
+        max-width: 220px;
+        max-height: 60px;
+        overflow-y: auto;
+        white-space: normal;
+        font-size: 0.8rem;
+        line-height: 1.3;
+        color: #64748b;
+    }
+
+    .url-truncate {
+        max-width: 140px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+
+    .guid-badge {
+        font-family: monospace;
+        font-size: 0.75rem;
+        background: #f1f5f9;
+        padding: 3px 8px;
+        border-radius: 4px;
+        color: #64748b;
+        max-width: 100px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @@media (max-width: 991px) {
+        .admin-projects-wrapper {
+            margin-left: 0;
+            padding: 15px;
+        }
+    }
+</style>
+
+<div class="admin-projects-wrapper">
+    <!-- Üst Başlıq və Düymələr -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-dark m-0">Projects</h2>
-        <a class="btn" style="background-color: #0d233a; color: white;" asp-action="create">
-            <i class="fa-solid fa-plus me-1"></i> Create
+        <div>
+            <h3 class="fw-bold text-dark m-0">Projects</h3>
+            <span class="text-muted small">Bütün sütunlar daxil olmaqla idarəetmə paneli</span>
+        </div>
+        <a class="btn btn-dark rounded-pill px-3 shadow-sm d-inline-flex align-items-center gap-2" asp-action="create">
+            <i class="fa-solid fa-plus small"></i>
+            <span>Create</span>
         </a>
     </div>
 
-    <div class="table-responsive mb-4">
-        <table class="table table-striped align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Project</th>
-                    <th scope="col">GitHub</th>
-                    <th scope="col">Live Preview</th>
-                    <th scope="col">Short Description</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Featured</th>
-                    <th scope="col">CreatedAt</th>
-                    <th scope="col">UpdatedAt</th>
-                    <th scope="col" class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var project in Model.Data)
-                {
+    <!-- Cədvəl Kartı -->
+    <div class="admin-table-card mb-4">
+        <div class="table-responsive">
+            <table class="table custom-admin-table align-middle">
+                <thead>
                     <tr>
-                        <th scope="row">@project.Id</th>
-                        <td>@project.ProjectName</td>
-                        <td>@project.GitHubURL</td>
-                        <td>@project.LiveURL</td>
-                        <td>@project.ShortDescription</td>
-                        <td>@project.Description</td>
-                        <td>
-                            <img alt="Image"
-                                 class="rounded-circle border"
-                                 width="50"
-                                 height="50"
-                                 style="object-fit: cover;" src="~/assets/images/projects/@project.Image" />
-                        </td>
-                        <td>@project.IsFeatured</td>
-                        <td>@project.CreatedAt</td>
-                        <td>@project.UpdatedAt</td>
-                        <td>
-                            <div class="d-flex gap-3 justify-content-center align-items-center">
-                                <a class="btn p-0 border-0 bg-transparent fs-5" asp-action="update" asp-route-id="@project.Id">
-                                    <i class="fa-solid fa-edit text-warning"></i>
-                                </a>
-
-                                <form asp-action="remove" method="post" asp-route-id="@project.Id" class="m-0">
-                                    <button type="submit" class="btn p-0 border-0 bg-transparent fs-5">
-                                        <i class="fa-solid fa-trash text-danger"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
+                        <th scope="col">Id</th>
+                        <th scope="col">Project</th>
+                        <th scope="col">GitHub</th>
+                        <th scope="col">Live Preview</th>
+                        <th scope="col">Short Description</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Featured</th>
+                        <th scope="col">CreatedAt</th>
+                        <th scope="col">UpdatedAt</th>
+                        <th scope="col" class="text-center">Actions</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var project in Model.Data)
+                    {
+                        <tr>
+                            <!-- 1. Id -->
+                            <th scope="row">
+                                <span class="guid-badge" title="@project.Id">@project.Id</span>
+                            </th>
+
+                            <!-- 2. Project Name -->
+                            <td class="fw-bold text-dark">@project.ProjectName</td>
+
+                            <!-- 3. GitHub URL -->
+                            <td>
+                                @if (!string.IsNullOrWhiteSpace(project.GitHubURL))
+                                {
+                                    <a href="@project.GitHubURL" target="_blank" class="text-decoration-none text-primary url-truncate" title="@project.GitHubURL">
+                                        <i class="fab fa-github me-1"></i>@project.GitHubURL
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+
+                            <!-- 4. Live URL -->
+                            <td>
+                                @if (!string.IsNullOrWhiteSpace(project.LiveURL))
+                                {
+                                    <a href="@project.LiveURL" target="_blank" class="text-decoration-none text-success url-truncate" title="@project.LiveURL">
+                                        <i class="fas fa-external-link-alt me-1"></i>@project.LiveURL
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+
+                            <!-- 5. Short Description -->
+                            <td>
+                                <div class="desc-scroll-box" title="@project.ShortDescription">
+                                    @project.ShortDescription
+                                </div>
+                            </td>
+
+                            <!-- 6. Full Description -->
+                            <td>
+                                <div class="desc-scroll-box" title="@project.Description">
+                                    @project.Description
+                                </div>
+                            </td>
+
+                            <!-- 7. Image -->
+                            <td>
+                                <img src="~/assets/images/projects/@project.Image"
+                                     alt="Image"
+                                     class="rounded-3 border shadow-sm"
+                                     width="45"
+                                     height="45"
+                                     style="object-fit: cover;" />
+                            </td>
+
+                            <!-- 8. Featured -->
+                            <td>
+                                @if (project.IsFeatured)
+                                {
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1 rounded-pill small">
+                                        True
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-light text-secondary border px-2.5 py-1 rounded-pill small">
+                                        False
+                                    </span>
+                                }
+                            </td>
+
+                            <!-- 9. CreatedAt -->
+                            <td class="small text-muted">@project.CreatedAt</td>
+
+                            <!-- 10. UpdatedAt -->
+                            <td class="small text-muted">@(project.UpdatedAt.HasValue ? project.UpdatedAt.Value.ToString() : "-")</td>
+
+                            <!-- 11. Actions -->
+                            <td>
+                                <div class="d-flex gap-2 justify-content-center align-items-center">
+                                    <a class="btn btn-sm btn-light text-warning rounded-pill px-2.5"
+                                       asp-action="update"
+                                       asp-route-id="@project.Id"
+                                       title="Edit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+
+                                    <form asp-action="remove" method="post" asp-route-id="@project.Id" class="m-0">
+                                        <button type="submit"
+                                                class="btn btn-sm btn-light text-danger rounded-pill px-2.5"
+                                                onclick="return confirm('Silməyə əminsiniz?');"
+                                                title="Delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-area="admin" asp-controller="dashboard" asp-action="index">
-        <i class="fa-solid fa-arrow-left me-1"></i> Go Dashboard
+    <!-- Dashboard Düyməsi -->
+    <a class="btn btn-outline-dark rounded-pill px-3 btn-sm d-inline-flex align-items-center gap-2"
+       asp-area="admin"
+       asp-controller="dashboard"
+       asp-action="index">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Go Dashboard</span>
     </a>
 </div>

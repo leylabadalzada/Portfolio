@@ -28,27 +28,20 @@ namespace Portfolio.Web.Areas.admin.Controllers
 
         public async Task<IActionResult> Create()
         {
-            ViewBag.Skills = Enum.GetValues<SkillType>()
-                .Select(sm => new SelectListItem
-                {
-                    Text = sm.ToString(),
-                    Value = sm.ToString()
-                });
-            var fields = await _fieldService.GetAllAsync();
-
-            ViewBag.Fields = (fields.Data ?? new List<FieldGetVM>())
-                .Select(x => new SelectListItem
-                {
-                    Text = x.FieldName,
-                    Value = x.Id.ToString()
-                })
-                .ToList();
+            await GenerateFieldViewBagAsync();
+            GenerateViewBags();
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(SkillCreateVM vm)
         {
+            if (!ModelState.IsValid)
+            {
+                await GenerateFieldViewBagAsync();
+                GenerateViewBags();
+                return View(vm);
+            }
             var result = await _skillService.CreateAsync(vm);
             if (!result.Result)
             {
@@ -69,21 +62,21 @@ namespace Portfolio.Web.Areas.admin.Controllers
 
             var vm = new SkillUpdateVM
             {
-                Description = skill.Data.Description,
+                Level = skill.Data.Level,
                 Name = skill.Data.Name
             };
-            ViewBag.Skills = Enum.GetValues<SkillType>()
-               .Select(sm => new SelectListItem
-               {
-                   Text = sm.ToString(),
-                   Value = sm.ToString()
-               });
+            GenerateViewBags();
             return View(vm);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(Guid id, SkillUpdateVM vm)
         {
+            if (!ModelState.IsValid)
+            {
+                GenerateViewBags();
+                return View(vm);
+            }
             var result = await _skillService.UpdateAsync(id, vm);
             if (!result.Result)
             {
@@ -104,6 +97,36 @@ namespace Portfolio.Web.Areas.admin.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        async Task GenerateFieldViewBagAsync()
+        {
+            var fields = await _fieldService.GetAllAsync();
+
+            ViewBag.Fields = (fields.Data ?? new List<FieldGetVM>())
+                .Select(x => new SelectListItem
+                {
+                    Text = x.FieldName,
+                    Value = x.Id.ToString()
+                })
+                .ToList();
+        }
+
+        void GenerateViewBags()
+        {
+
+            ViewBag.Skills = Enum.GetValues<SkillType>()
+               .Select(sm => new SelectListItem
+               {
+                   Text = sm.ToString(),
+                   Value = sm.ToString()
+               });
+            ViewBag.Levels = Enum.GetValues<SkillLevel>()
+               .Select(sm => new SelectListItem
+               {
+                   Text = sm.ToString(),
+                   Value = sm.ToString()
+               });
         }
     }
 }

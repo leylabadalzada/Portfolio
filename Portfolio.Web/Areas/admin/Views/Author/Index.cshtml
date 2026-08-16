@@ -1,71 +1,175 @@
 ﻿@model ResponseVM<AuthorGetVM>
 
-<div class="container my-5">
+<style>
+    /* Sol menyu (aside) ilə toqquşmanı önləmək üçün */
+    .admin-author-wrapper {
+        box-sizing: border-box;
+    }
+
+    /* Temanıza uyğun kart və cədvəl stili */
+    .theme-table-card {
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+    }
+
+    .theme-custom-table {
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+
+        .theme-custom-table thead th {
+            background-color: #f8fafc;
+            color: #0d233a;
+            font-weight: 600;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 12px 16px;
+        }
+
+        .theme-custom-table tbody td,
+        .theme-custom-table tbody th {
+            padding: 12px 16px;
+            vertical-align: middle;
+        }
+
+    /* Uzun xanalar üçün nizamlı box */
+    .cell-scroll-box {
+        max-width: 180px;
+        max-height: 55px;
+        overflow-y: auto;
+        white-space: normal;
+        font-size: 0.85rem;
+        line-height: 1.3;
+    }
+
+    .guid-badge {
+        font-family: monospace;
+        font-size: 0.75rem;
+        background: #f1f5f9;
+        padding: 4px 8px;
+        border-radius: 4px;
+        max-width: 110px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Temanızın əsas rəngli düymələri */
+    .btn-theme-primary {
+        background-color: #0d233a !important;
+        color: #ffffff !important;
+        border: 1px solid #0d233a !important;
+        transition: opacity 0.2s ease;
+    }
+
+        .btn-theme-primary:hover {
+            opacity: 0.9;
+            color: #ffffff !important;
+        }
+
+    .btn-theme-outline {
+        background-color: transparent !important;
+        color: #0d233a !important;
+        border: 1px solid #0d233a !important;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-theme-outline:hover {
+            background-color: #0d233a !important;
+            color: #ffffff !important;
+        }
+
+    @@media (max-width: 991px) {
+        .admin-author-wrapper {
+            margin-left: 0;
+            padding: 15px;
+        }
+    }
+</style>
+
+<div class="admin-author-wrapper">
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
             <strong>Uğurlu!</strong> @TempData["SuccessMessage"]
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
-    <h2 class="text-dark mb-4">Author Details</h2>
 
-    <div class="table-responsive mb-4">
-        <table class="table table-striped align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">FirstName</th>
-                    <th scope="col">LastName</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Info</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Birthdate</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">IsFreeAvailable</th>
-                    <th scope="col">Image</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">@Model.Data.Id</th>
-                    <td>@Model.Data.FirstName</td>
-                    <td>@Model.Data.LastName</td>
-                    <td>@Model.Data.Email</td>
-                    <td>@Model.Data.Info</td>
-                    <td>@Model.Data.Description</td>
-                    <td>@Model.Data.Location</td>
-                    <td>@Model.Data.BirthDate</td>
-                    <td>@Model.Data.PhoneNumber</td>
-                    <td>@(Model.Data.isFreelanceAvailable == true ? "Yes" : "No")</td>
-                    <td>
-                        <img src="~/assets/images/authors/@Model.Data.ImageName"
-                             class="rounded border"
-                             width="60"
-                             height="60"
-                             style="object-fit: cover;"
-                             alt="Author Image" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <h2 class="text-dark mb-4 fw-bold">Author Details</h2>
+
+    <!-- Cədvəl Kartı -->
+    <div class="theme-table-card mb-4">
+        <div class="table-responsive">
+            <table class="table theme-custom-table align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">FirstName</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Info</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">IsFreeAvailable</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <span class="guid-badge" title="@Model.Data.Id">@Model.Data.Id</span>
+                        </th>
+                        <td>@Model.Data.FirstName</td>
+                        <td>@Model.Data.LastName</td>
+                        <td>@Model.Data.Email</td>
+                        <td>
+                            <div class="cell-scroll-box" title="@Model.Data.Info">
+                                @Model.Data.Info
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cell-scroll-box" title="@Model.Data.Description">
+                                @Model.Data.Description
+                            </div>
+                        </td>
+                        <td>@Model.Data.Location</td>
+                        <td>@Model.Data.BirthDate</td>
+                        <td>@Model.Data.PhoneNumber</td>
+                        <td>@(Model.Data.isFreelanceAvailable == true ? "Yes" : "No")</td>
+                        <td>
+                            <img src="~/assets/images/authors/@Model.Data.ImageName"
+                                 class="rounded border shadow-sm"
+                                 width="50"
+                                 height="50"
+                                 style="object-fit: cover;"
+                                 alt="Author Image" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="d-flex gap-2">
-        <a class="btn" style="background-color: #0d233a; color: white;" asp-area="admin" asp-controller="author" asp-action="update">
+    <!-- Düymələr Sahəsi (İkonlar Düzəldildi) -->
+    <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-theme-primary px-3 rounded-2" asp-area="admin" asp-controller="author" asp-action="update">
             <i class="fa-solid fa-pen-to-square me-1"></i> Update
         </a>
-        <a class="btn" style="background-color: #0d233a; color: white;" asp-area="admin" asp-controller="author" asp-action="changeimage">
+        <a class="btn btn-theme-primary px-3 rounded-2" asp-area="admin" asp-controller="author" asp-action="changeimage">
             <i class="fa-solid fa-image me-1"></i> Change Image
         </a>
-        <a class="btn" style="background-color: #0d233a; color: white;" asp-area="admin" asp-controller="author" asp-action="changeemail">
-            <i class="fa-solid fa-image me-1"></i> Change Email
+        <a class="btn btn-theme-primary px-3 rounded-2" asp-area="admin" asp-controller="author" asp-action="changeemail">
+            <i class="fa-solid fa-envelope me-1"></i> Change Email
         </a>
-        <a class="btn" style="background-color: #0d233a; color: white;" asp-area="admin" asp-controller="author" asp-action="checkpassword">
-            <i class="fa-solid fa-image me-1"></i> Change Password
+        <a class="btn btn-theme-primary px-3 rounded-2" asp-area="admin" asp-controller="author" asp-action="checkpassword">
+            <i class="fa-solid fa-key me-1"></i> Change Password
         </a>
-        <a class="btn" style="background-color: transparent; color: #0d233a; border: 1px solid #0d233a;" asp-area="admin" asp-controller="dashboard" asp-action="index">
+        <a class="btn btn-theme-outline px-3 rounded-2" asp-area="admin" asp-controller="dashboard" asp-action="index">
             <i class="fa-solid fa-arrow-left me-1"></i> Go Dashboard
         </a>
     </div>

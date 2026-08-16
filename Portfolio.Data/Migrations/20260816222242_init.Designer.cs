@@ -12,8 +12,8 @@ using Portfolio.Data.Contexts;
 namespace Portfolio.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260704203051_specilaityseed")]
-    partial class specilaityseed
+    [Migration("20260816222242_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "16cc1616-c932-4d2a-b678-0bf7a078cc58",
+                            Id = "9191baef-c38a-4b33-bfc8-a0d3c830a0bc",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         });
@@ -221,8 +221,8 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "68eaa0bb-050e-4f2c-91bc-e73da839a3e7",
-                            RoleId = "16cc1616-c932-4d2a-b678-0bf7a078cc58"
+                            UserId = "354a8bab-1478-45f7-83d6-f9ca2ba94135",
+                            RoleId = "9191baef-c38a-4b33-bfc8-a0d3c830a0bc"
                         });
                 });
 
@@ -472,12 +472,11 @@ namespace Portfolio.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid>("FieldId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Name")
                         .HasColumnType("integer");
@@ -546,8 +545,8 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("c803ad47-b3dd-4f14-9d15-08b5d3211d4a"),
-                            CreatedAt = new DateTime(2026, 7, 4, 20, 30, 50, 697, DateTimeKind.Utc).AddTicks(2718),
+                            ID = new Guid("2dae2e5f-3d58-444d-b40c-23ee8e0bd281"),
+                            CreatedAt = new DateTime(2026, 8, 16, 22, 22, 41, 953, DateTimeKind.Utc).AddTicks(2767),
                             IsMain = true,
                             Name = "Some speciality"
                         });
@@ -597,23 +596,23 @@ namespace Portfolio.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "68eaa0bb-050e-4f2c-91bc-e73da839a3e7",
+                            Id = "354a8bab-1478-45f7-83d6-f9ca2ba94135",
                             AccessFailedCount = 3,
-                            ConcurrencyStamp = "af44cc07-82d3-4f6a-9ded-c03e2b38e72e",
+                            ConcurrencyStamp = "18a1bb1e-d0e7-4a08-80d1-64a33508bed6",
                             Email = "email@sample.domain",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "EMAIL@SAMLE.DOMAIN",
                             NormalizedUserName = "AUTHOR123",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDMZyrzDzMsFFjNOPuTfV9w2l+9TgEpQt4s4NDadFxZIJ4+m4P/P7LdG8j5nc3oQgA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDlgyl3nbU/yfKSWSeejPNcWSH1ruCzzkYZ9w/CmGpD7y4VI35COsOrCFme0KrgCqw==",
                             PhoneNumber = "+994123456789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "82094a2d-8ff1-46c6-9804-3ed8a9dc243e",
+                            SecurityStamp = "fbfe9079-df7a-45c3-b1bb-54cb036e771d",
                             TwoFactorEnabled = false,
                             UserName = "author123",
                             BirthDate = new DateOnly(1, 1, 1),
-                            CreatedAt = new DateTime(2026, 7, 5, 0, 30, 50, 647, DateTimeKind.Utc).AddTicks(7623),
-                            Description = "Sample Developer Description",
+                            CreatedAt = new DateTime(2026, 8, 17, 2, 22, 41, 902, DateTimeKind.Utc).AddTicks(9166),
+                            Description = "Sample Developer Level",
                             FirstName = "FirstName",
                             ImageName = "default.png",
                             Info = "Sample Developer Information",
