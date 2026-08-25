@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Portfolio.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class deployed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -348,22 +348,22 @@ namespace Portfolio.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "9191baef-c38a-4b33-bfc8-a0d3c830a0bc", null, "Author", "AUTHOR" });
+                values: new object[] { "fe4efeca-f82c-4b7a-bb32-8f953002dbd4", null, "Author", "AUTHOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "BirthDate", "ConcurrencyStamp", "CreatedAt", "Description", "Discriminator", "Email", "EmailConfirmed", "FirstName", "ImageName", "Info", "LastName", "Location", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedAt", "UserName", "isFreelanceAvailable" },
-                values: new object[] { "354a8bab-1478-45f7-83d6-f9ca2ba94135", 3, new DateOnly(1, 1, 1), "18a1bb1e-d0e7-4a08-80d1-64a33508bed6", new DateTime(2026, 8, 17, 2, 22, 41, 902, DateTimeKind.Utc).AddTicks(9166), "Sample Developer Level", "Author", "email@sample.domain", true, "FirstName", "default.png", "Sample Developer Information", "Lastname", "Location", true, null, "EMAIL@SAMLE.DOMAIN", "AUTHOR123", "AQAAAAIAAYagAAAAEDlgyl3nbU/yfKSWSeejPNcWSH1ruCzzkYZ9w/CmGpD7y4VI35COsOrCFme0KrgCqw==", "+994123456789", true, "fbfe9079-df7a-45c3-b1bb-54cb036e771d", false, null, "author123", true });
+                values: new object[] { "456026f7-9e00-402f-a07f-871920a136cb", 3, new DateOnly(1, 1, 1), "3a319d2b-5056-413a-8ef8-f6e1b618adcc", new DateTime(2026, 8, 25, 23, 18, 25, 704, DateTimeKind.Utc).AddTicks(6848), "Sample Developer Level", "Author", "email@sample.domain", true, "FirstName", "default.png", "Sample Developer Information", "Lastname", "Location", true, null, "EMAIL@SAMLE.DOMAIN", "AUTHOR123", "AQAAAAIAAYagAAAAENTTYFjaf+5NyCToDhYAZ6VgKUDRy9ObHpRo861YsVJzg44y/k//55Ov8IADLDxSXA==", "+994123456789", true, "dd137669-cc66-4d45-9c7c-1e0e7c21d2b0", false, null, "author123", true });
 
             migrationBuilder.InsertData(
                 table: "Specialities",
                 columns: new[] { "ID", "CreatedAt", "IsMain", "Name", "UpdatedAt" },
-                values: new object[] { new Guid("2dae2e5f-3d58-444d-b40c-23ee8e0bd281"), new DateTime(2026, 8, 16, 22, 22, 41, 953, DateTimeKind.Utc).AddTicks(2767), true, "Some speciality", null });
+                values: new object[] { new Guid("004177f6-4bad-46fa-895c-dd3232e351e1"), new DateTime(2026, 8, 25, 19, 18, 25, 754, DateTimeKind.Utc).AddTicks(8982), true, "Some speciality", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "9191baef-c38a-4b33-bfc8-a0d3c830a0bc", "354a8bab-1478-45f7-83d6-f9ca2ba94135" });
+                values: new object[] { "fe4efeca-f82c-4b7a-bb32-8f953002dbd4", "456026f7-9e00-402f-a07f-871920a136cb" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
