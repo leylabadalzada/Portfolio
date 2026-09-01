@@ -74,7 +74,7 @@ namespace Portfolio.Service.Services.Concretes
                 await smtp.ConnectAsync(
                     _config["EmailSettings:Server"],
                     int.Parse(_config["EmailSettings:Port"]),
-                    MailKit.Security.SecureSocketOptions.StartTls);
+                    MailKit.Security.SecureSocketOptions.SslOnConnect);
 
                 await smtp.AuthenticateAsync(
                     systemEmail,

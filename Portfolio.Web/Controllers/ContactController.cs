@@ -30,7 +30,7 @@ namespace Portfolio.Web.Controllers
             if (!result.Result)
             {
                 ModelState.AddModelError("internalservererror", result.Message);
-                return View(vm);
+                //return View(vm);
             }
             TempData["SuccessMessage"] = "Mesajınız uğurla göndərildi! Tezliklə sizinlə əlaqə saxlanılacaq.";
             return RedirectToAction(nameof(Index));
